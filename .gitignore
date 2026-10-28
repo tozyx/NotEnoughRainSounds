@@ -28,3 +28,4 @@ work/
 
 # Local audio-editor waveform caches.
 *.reapeaks
+/soundResource/ai-generated-and-freesound/raw/*/
