@@ -16,7 +16,7 @@ rain_sounds_fabric_1..3.ogg, rain_sounds_droplet_1..3.ogg.
 Material recordings retain full source durations; plant drips remain short.
 Mono Vorbis processing and runtime fades are recorded in the manifest.
 The exact original names, hashes, author comments and crop positions are in
-META-INF/licenses/blocksidesound-rain-audio-manifest.json.
+META-INF/licenses/notenoughrainsounds-rain-audio-manifest.json.
 
 Additional weather recordings:
 rain7..12.ogg retain full source durations and are downmixed to mono so
@@ -37,7 +37,7 @@ Tomas Herudek — Rain on window ambience
 Other recording author comments are preserved in the manifest.
 The MIT declaration is the upstream project's declaration; separate original
 recording sources have not been verified. These sounds are credited as
-third-party recordings, not recordings by BlocksideSound.
+third-party recordings, not recordings by Not Enough Rain Sounds.
 
 Current processing:
 Material recordings remain separate complete takes, with the existing mono

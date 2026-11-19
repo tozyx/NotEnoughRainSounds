@@ -13,5 +13,5 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'BlocksideSound'
+rootProject.name = 'NotEnoughRainSounds'
 include 'common', 'fabric', 'neoforge'

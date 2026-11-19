@@ -1,6 +1,6 @@
-BlocksideSound
+Not Enough Rain Sounds
 Copyright (C) 2026 tozyx
-https://github.com/tozyx/BlocksideSound
+https://github.com/tozyx/NotEnoughRainSounds
 
 PROJECT LICENSE AND SCOPE
 
@@ -27,7 +27,7 @@ recorded individually; no blanket new audio license is granted here.
 
 This combined LICENSE is included under META-INF/licenses/ in release and
 source jars, alongside the unchanged the-sound-of-rain.txt attribution and
-blocksidesound-rain-audio-manifest.json. In the repository, see
+notenoughrainsounds-rain-audio-manifest.json. In the repository, see
 common/src/main/resources/META-INF/licenses/ and docs/rain-audio-manifest.json.
 
 ----- BEGIN UNMODIFIED GNU GPL VERSION 3 TEXT -----
@@ -268,19 +268,19 @@ The GNU General Public License does not permit incorporating your program into p
 
 ----- END GNU GPL VERSION 3 TEXT -----
 
-BlocksideSound Minecraft linking exception
+Not Enough Rain Sounds Minecraft linking exception
 Additional permission under section 7 of GNU GPL version 3
 
-If you modify BlocksideSound, or any covered work, by linking or combining it
+If you modify Not Enough Rain Sounds, or any covered work, by linking or combining it
 with Minecraft: Java Edition, including the modifications needed to run the
 Fabric Loader, NeoForge or Quilt Loader, the copyright holder of
-BlocksideSound grants you additional permission to convey the resulting work.
+Not Enough Rain Sounds grants you additional permission to convey the resulting work.
 This permission also covers linking or combining the covered work with those
 mod loaders and the libraries they or Minecraft normally require to run.
 
 You must still comply with GNU GPL version 3 for all code covered by that
 license, including providing its Corresponding Source when required. This
-permission does not waive source-code obligations for BlocksideSound or
+permission does not waive source-code obligations for Not Enough Rain Sounds or
 modifications of its covered code, and does not grant a general exception
 for incorporating that code into unrelated proprietary software.
 
@@ -293,4 +293,4 @@ You may remove this additional permission from your version as permitted by
 section 7 of GNU GPL version 3.
 
 Naming a mod loader here grants permission only; it is not a statement that
-BlocksideSound has been tested with or supports that loader.
+Not Enough Rain Sounds has been tested with or supports that loader.

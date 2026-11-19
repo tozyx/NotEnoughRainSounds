@@ -1,6 +1,6 @@
 [
   {
-    "output": "assets/blocksidesound/sounds/rain/wood_01.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/wood_01.ogg",
     "original_file": "rain_sounds_wood_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -25,7 +25,7 @@
     "category_gain": 1.198953
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/wood_02.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/wood_02.ogg",
     "original_file": "rain_sounds_wood_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -50,7 +50,7 @@
     "category_gain": 1.198953
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/wood_03.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/wood_03.ogg",
     "original_file": "rain_sounds_wood_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -75,7 +75,7 @@
     "category_gain": 1.198953
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/metal_01.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/metal_01.ogg",
     "original_file": "rain_sounds_metal_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -97,7 +97,7 @@
     "category_gain": 1.300955
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/metal_02.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/metal_02.ogg",
     "original_file": "rain_sounds_metal_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -119,7 +119,7 @@
     "category_gain": 1.300955
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/metal_03.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/metal_03.ogg",
     "original_file": "rain_sounds_metal_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -141,7 +141,7 @@
     "category_gain": 1.300955
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/glass_01.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/glass_01.ogg",
     "original_file": "rain_sounds_glass_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -170,7 +170,7 @@
     "category_gain": 0.854839
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/glass_02.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/glass_02.ogg",
     "original_file": "rain_sounds_glass_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -199,7 +199,7 @@
     "category_gain": 0.854839
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/glass_03.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/glass_03.ogg",
     "original_file": "rain_sounds_glass_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -228,7 +228,7 @@
     "category_gain": 0.854839
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/foliage_01.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/foliage_01.ogg",
     "original_file": "rain_sounds_foliage_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -256,7 +256,7 @@
     "category_gain": 2.627265
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/foliage_02.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/foliage_02.ogg",
     "original_file": "rain_sounds_foliage_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -284,7 +284,7 @@
     "category_gain": 2.627265
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/foliage_03.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/foliage_03.ogg",
     "original_file": "rain_sounds_foliage_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -312,7 +312,7 @@
     "category_gain": 2.627265
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/granular_01.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/granular_01.ogg",
     "original_file": "rain_sounds_sand_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -337,7 +337,7 @@
     "category_gain": 1.998266
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/granular_02.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/granular_02.ogg",
     "original_file": "rain_sounds_sand_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -362,7 +362,7 @@
     "category_gain": 1.998266
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/granular_03.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/granular_03.ogg",
     "original_file": "rain_sounds_sand_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -387,7 +387,7 @@
     "category_gain": 1.998266
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/water_01.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/water_01.ogg",
     "original_file": "rain_sounds_water_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -412,7 +412,7 @@
     "category_gain": 0.645921
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/water_02.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/water_02.ogg",
     "original_file": "rain_sounds_water_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -437,7 +437,7 @@
     "category_gain": 0.645921
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/water_03.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/water_03.ogg",
     "original_file": "rain_sounds_water_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -462,7 +462,7 @@
     "category_gain": 0.645921
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/soft_01.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/soft_01.ogg",
     "original_file": "rain_sounds_fabric_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -491,7 +491,7 @@
     "category_gain": 2.049567
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/soft_02.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/soft_02.ogg",
     "original_file": "rain_sounds_fabric_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -520,7 +520,7 @@
     "category_gain": 2.049567
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/soft_03.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/soft_03.ogg",
     "original_file": "rain_sounds_fabric_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -549,7 +549,7 @@
     "category_gain": 2.049567
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/plant_drip_01.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/plant_drip_01.ogg",
     "original_file": "rain_sounds_droplet_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -573,7 +573,7 @@
     "category_gain": 9.73617
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/plant_drip_02.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/plant_drip_02.ogg",
     "original_file": "rain_sounds_droplet_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -597,7 +597,7 @@
     "category_gain": 9.73617
   },
   {
-    "output": "assets/blocksidesound/sounds/rain/plant_drip_03.ogg",
+    "output": "assets/notenoughrainsounds/sounds/rain/plant_drip_03.ogg",
     "original_file": "rain_sounds_droplet_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -621,7 +621,7 @@
     "category_gain": 9.73617
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_close_1.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_close_1.ogg",
     "original_file": "thunder_sounds_close_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -646,7 +646,7 @@
     "decoded_peak": 0.815551
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_close_2.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_close_2.ogg",
     "original_file": "thunder_sounds_close_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -671,7 +671,7 @@
     "decoded_peak": 0.815998
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_close_3.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_close_3.ogg",
     "original_file": "thunder_sounds_close_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -696,7 +696,7 @@
     "decoded_peak": 0.829437
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_far_1.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_far_1.ogg",
     "original_file": "thunder_sounds_far_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -721,7 +721,7 @@
     "decoded_peak": 0.80689
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_far_2.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_far_2.ogg",
     "original_file": "thunder_sounds_far_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -746,7 +746,7 @@
     "decoded_peak": 0.22825
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_far_3.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_far_3.ogg",
     "original_file": "thunder_sounds_far_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -771,7 +771,7 @@
     "decoded_peak": 0.478548
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_far_4.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_far_4.ogg",
     "original_file": "thunder_sounds_far_4.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -797,7 +797,7 @@
     "decoded_peak": 0.687644
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_medium_1.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_medium_1.ogg",
     "original_file": "thunder_sounds_medium_1.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -823,7 +823,7 @@
     "decoded_peak": 0.823123
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_medium_2.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_medium_2.ogg",
     "original_file": "thunder_sounds_medium_2.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -849,7 +849,7 @@
     "decoded_peak": 0.75503
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_medium_3.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_medium_3.ogg",
     "original_file": "thunder_sounds_medium_3.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -875,7 +875,7 @@
     "decoded_peak": 0.817162
   },
   {
-    "output": "assets/blocksidesound/sounds/weather/thunder_medium_4.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/thunder_medium_4.ogg",
     "original_file": "thunder_sounds_medium_4.ogg",
     "source_project": "The Sound of Rain",
     "source_author": "JShep",
@@ -906,7 +906,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain7.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain7.ogg",
     "original_file": "rain7.ogg",
     "original_sha256": "b89bd3774c11a64c2951681bd8a0e4f87431e6056ec735a63352aa5bd707ac29",
     "original_vorbis_comments": [
@@ -931,7 +931,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain8.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain8.ogg",
     "original_file": "rain8.ogg",
     "original_sha256": "4bc79c2060cd63cac210cab134cb2b48da133ff4e88e154786965cb8516c2953",
     "original_vorbis_comments": [
@@ -956,7 +956,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain9.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain9.ogg",
     "original_file": "rain9.ogg",
     "original_sha256": "a696a7933e8df05e0d475847b3e216fd472cd027c1455515ede4bb57a99d9e6c",
     "original_vorbis_comments": [
@@ -981,7 +981,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain10.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain10.ogg",
     "original_file": "rain10.ogg",
     "original_sha256": "cfb259f42b58fad47dccfe4f799f1d2033dcaa16614f867e6098fe58ad5debce",
     "original_vorbis_comments": [
@@ -1006,7 +1006,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain11.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain11.ogg",
     "original_file": "rain11.ogg",
     "original_sha256": "7ef0939e540fbab8324ab01b5894cabfcc6e4b0bd208863d5c51736f069ce98b",
     "original_vorbis_comments": [
@@ -1031,7 +1031,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain12.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain12.ogg",
     "original_file": "rain12.ogg",
     "original_sha256": "9084c2e186adbc40ec092c5b087c715d003e32a6c442c738f5187be15f4fb039",
     "original_vorbis_comments": [
@@ -1056,7 +1056,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain_above7.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain_above7.ogg",
     "original_file": "rain7.ogg",
     "original_sha256": "b89bd3774c11a64c2951681bd8a0e4f87431e6056ec735a63352aa5bd707ac29",
     "original_vorbis_comments": [
@@ -1082,7 +1082,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain_above8.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain_above8.ogg",
     "original_file": "rain8.ogg",
     "original_sha256": "4bc79c2060cd63cac210cab134cb2b48da133ff4e88e154786965cb8516c2953",
     "original_vorbis_comments": [
@@ -1108,7 +1108,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain_above9.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain_above9.ogg",
     "original_file": "rain9.ogg",
     "original_sha256": "a696a7933e8df05e0d475847b3e216fd472cd027c1455515ede4bb57a99d9e6c",
     "original_vorbis_comments": [
@@ -1134,7 +1134,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain_above10.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain_above10.ogg",
     "original_file": "rain10.ogg",
     "original_sha256": "cfb259f42b58fad47dccfe4f799f1d2033dcaa16614f867e6098fe58ad5debce",
     "original_vorbis_comments": [
@@ -1160,7 +1160,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain_above11.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain_above11.ogg",
     "original_file": "rain11.ogg",
     "original_sha256": "7ef0939e540fbab8324ab01b5894cabfcc6e4b0bd208863d5c51736f069ce98b",
     "original_vorbis_comments": [
@@ -1186,7 +1186,7 @@
     "declared_project_license": "MIT",
     "license_verified_date": "2026-10-14",
     "original_release_version": null,
-    "output": "assets/blocksidesound/sounds/weather/rain_above12.ogg",
+    "output": "assets/notenoughrainsounds/sounds/weather/rain_above12.ogg",
     "original_file": "rain12.ogg",
     "original_sha256": "9084c2e186adbc40ec092c5b087c715d003e32a6c442c738f5187be15f4fb039",
     "original_vorbis_comments": [

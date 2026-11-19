@@ -1,4 +1,4 @@
-# BlocksideSound · 方间微响
+# Not Enough Rain Sounds · 更好的雨声
 
 A Minecraft sound mod. In developing.
 

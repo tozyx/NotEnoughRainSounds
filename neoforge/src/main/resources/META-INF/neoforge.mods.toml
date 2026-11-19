@@ -1,27 +1,27 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
 license = "GPL-3.0-only"
-issueTrackerURL = "https://github.com/tozyx/BlocksideSound/issues"
+issueTrackerURL = "https://github.com/tozyx/NotEnoughRainSounds/issues"
 
 [[mods]]
-modId = "blocksidesound"
+modId = "notenoughrainsounds"
 version = "${version}"
-displayName = "BlocksideSound"
+displayName = "Not Enough Rain Sounds"
 authors = "tozyx"
-displayURL = "https://github.com/tozyx/BlocksideSound"
+displayURL = "https://github.com/tozyx/NotEnoughRainSounds"
 description = '''Material-aware rain and carefully designed sound details for Minecraft.'''
 
 [[mixins]]
-config = "blocksidesound.client.mixins.json"
+config = "notenoughrainsounds.client.mixins.json"
 
-[[dependencies.blocksidesound]]
+[[dependencies.notenoughrainsounds]]
 modId = "neoforge"
 type = "required"
 versionRange = "[${neoforge_version},)"
 ordering = "NONE"
 side = "CLIENT"
 
-[[dependencies.blocksidesound]]
+[[dependencies.notenoughrainsounds]]
 modId = "minecraft"
 type = "required"
 versionRange = "[${minecraft_version}]"

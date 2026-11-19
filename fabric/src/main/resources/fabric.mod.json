@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "blocksidesound",
+  "id": "notenoughrainsounds",
   "version": "${version}",
-  "name": "BlocksideSound",
+  "name": "Not Enough Rain Sounds",
   "description": "Material-aware rain and carefully designed sound details for Minecraft.",
   "authors": [
     "tozyx"
   ],
   "contact": {
-    "sources": "https://github.com/tozyx/BlocksideSound",
-    "issues": "https://github.com/tozyx/BlocksideSound/issues"
+    "sources": "https://github.com/tozyx/NotEnoughRainSounds",
+    "issues": "https://github.com/tozyx/NotEnoughRainSounds/issues"
   },
   "license": "GPL-3.0-only",
   "environment": "client",
   "mixins": [
-    "blocksidesound.client.mixins.json"
+    "notenoughrainsounds.client.mixins.json"
   ],
   "entrypoints": {
     "client": [
-      "com.tozyx.blocksidesound.fabric.BlocksideSoundFabricClient"
+      "com.tozyx.notenoughrainsounds.fabric.NotEnoughRainSoundsFabricClient"
     ],
     "modmenu": [
-      "com.tozyx.blocksidesound.fabric.BlocksideSoundModMenu"
+      "com.tozyx.notenoughrainsounds.fabric.NotEnoughRainSoundsModMenu"
     ]
   },
   "depends": {
