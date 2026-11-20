@@ -1,23 +1,33 @@
 package com.tozyx.notenoughrainsounds.client.weather;
 
 import com.tozyx.notenoughrainsounds.NotEnoughRainSounds;
-import net.minecraft.client.resources.sounds.AbstractSoundInstance;
+import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.client.sounds.WeighedSoundEvents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.Vec3;
 
 /** Keeps native timing/position/range while making the mod gain independent of thunder's huge source volume. */
-final class ThunderSound extends AbstractSoundInstance {
+final class ThunderSound extends AbstractTickableSoundInstance {
     private final int nativeRange;
+    private final float dryGain;
+    private final OcclusionGain shelter;
+    private boolean resolved;
+    private WeighedSoundEvents event;
+    private float resourceVolume = 1;
+    private float resourcePitch = 1;
 
-    ThunderSound(SoundInstance original, ResourceLocation event, double gain) {
-        super(event, SoundSource.WEATHER, RandomSource.create());
+    ThunderSound(SoundInstance original, ResourceLocation event, double gain, boolean blocked) {
+        super(SoundEvent.createVariableRangeEvent(event), SoundSource.WEATHER, RandomSource.create());
         nativeRange = range(original.getVolume(), original.getSound().getAttenuationDistance());
-        volume = gain(original.getVolume(), gain);
+        dryGain = gain(original.getVolume(), gain);
+        shelter = new OcclusionGain(.65F, blocked);
+        volume = dryGain * shelter.current();
         pitch = original.getPitch();
         x = original.getX();
         y = original.getY();
@@ -26,10 +36,28 @@ final class ThunderSound extends AbstractSoundInstance {
         attenuation = original.getAttenuation();
     }
 
+    void obstructed(boolean blocked) {
+        shelter.target(blocked);
+    }
+
+    Vec3 tracePoint() { return new Vec3(x, y + .05, z); }
+
+    @Override
+    public void tick() {
+        volume = dryGain * shelter.tick();
+    }
+
+    @Override public float getVolume() { return volume * resourceVolume; }
+    @Override public float getPitch() { return pitch * resourcePitch; }
+
     @Override
     public WeighedSoundEvents resolve(SoundManager manager) {
-        WeighedSoundEvents event = super.resolve(manager);
+        if (resolved) return event;
+        event = super.resolve(manager);
+        resolved = true;
         if (event != null && sound != SoundManager.EMPTY_SOUND && sound != SoundManager.INTENTIONALLY_EMPTY_SOUND) {
+            resourceVolume = sound.getVolume().sample(random);
+            resourcePitch = sound.getPitch().sample(random);
             sound = new Sound(sound.getLocation(), sound.getVolume(), sound.getPitch(), sound.getWeight(),
                     sound.getType(), sound.shouldStream(), sound.shouldPreload(), nativeRange);
         }

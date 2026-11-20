@@ -1,5 +1,6 @@
 package com.tozyx.notenoughrainsounds.client.rain;
 
+import com.tozyx.notenoughrainsounds.client.weather.OcclusionGain;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.client.sounds.WeighedSoundEvents;
@@ -10,7 +11,9 @@ import net.minecraft.world.phys.Vec3;
 
 /** One independent full recording; other voices may overlap it without releasing or replacing it. */
 final class MaterialRainSound extends AbstractTickableSoundInstance {
+    static final double SURFACE_OFFSET = .05;
     private final boolean sustained;
+    private final OcclusionGain shelter;
     private float gain;
     private MaterialEnvelope envelope;
     private boolean resolved;
@@ -18,19 +21,20 @@ final class MaterialRainSound extends AbstractTickableSoundInstance {
     private float resourceVolume = 1;
     private float resourcePitch = 1;
 
-    MaterialRainSound(RainSound kind, float gain, float pitch, RandomSource random, Vec3 point) {
+    MaterialRainSound(RainSound kind, float gain, float pitch, RandomSource random, Vec3 point, boolean blocked) {
         super(SoundEvent.createVariableRangeEvent(kind.id()), SoundSource.WEATHER, random);
         this.sustained = kind != RainSound.PLANT_DRIP;
         this.gain = gain;
         this.pitch = pitch;
         x = point.x;
-        y = point.y + 0.05;
+        y = point.y + SURFACE_OFFSET;
         z = point.z;
         attenuation = Attenuation.LINEAR;
         relative = false;
         looping = false;
         delay = 0;
-        volume = sustained ? 0 : gain;
+        shelter = new OcclusionGain(.35F, blocked);
+        volume = sustained ? 0 : gain * shelter.current();
         envelope = new MaterialEnvelope(sustained);
     }
 
@@ -51,6 +55,12 @@ final class MaterialRainSound extends AbstractTickableSoundInstance {
         this.gain = gain;
     }
 
+    void obstructed(boolean blocked) {
+        shelter.target(blocked);
+    }
+
+    Vec3 position() { return new Vec3(x, y, z); }
+
     boolean releasing() { return envelope.releasing(); }
 
     void release() {
@@ -63,7 +73,7 @@ final class MaterialRainSound extends AbstractTickableSoundInstance {
 
     @Override
     public void tick() {
-        volume = gain * envelope.tick();
+        volume = gain * envelope.tick() * shelter.tick();
         if (envelope.finished()) stop();
     }
 }

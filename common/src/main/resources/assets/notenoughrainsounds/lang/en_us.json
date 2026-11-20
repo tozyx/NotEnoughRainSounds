@@ -32,7 +32,7 @@
   "notenoughrainsounds.config.material_enabled": "Enabled",
   "notenoughrainsounds.config.material_enabled_help": "Enable this detail sound. Background rain is controlled separately.",
   "notenoughrainsounds.config.material_volume": "Material Volume",
-  "notenoughrainsounds.config.material_volume_help": "Volume multiplier for this material only.",
+  "notenoughrainsounds.config.material_volume_help": "Adjusts this material or plant drip. Walls and roofs quiet sounds on the far side.",
   "notenoughrainsounds.config.probability": "Trigger Probability",
   "notenoughrainsounds.config.probability_help": "Chance per plant-drip attempt only. Ordinary material rain plays continuously.",
   "notenoughrainsounds.config.interval": "Attempt Interval",
@@ -88,12 +88,12 @@
   "notenoughrainsounds.config.ambience_volume_help": "Volume of the mod background rain, multiplied by Mod Volume. Separate from material drops and plant drips.",
   "notenoughrainsounds.config.rain_assets": "Rain Assets Ready: %s/%s",
   "notenoughrainsounds.config.replace_thunder": "Replace Thunder",
-  "notenoughrainsounds.config.replace_thunder_help": "Replace lightning thunder with close, medium or distant recordings. Lightning and impact sounds remain unchanged.",
+  "notenoughrainsounds.config.replace_thunder_help": "Selects close, medium or distant thunder recordings. Walls and roofs quiet the thunder.",
   "notenoughrainsounds.config.thunder_volume": "Thunder Volume",
   "notenoughrainsounds.config.thunder_volume_help": "Replacement thunder gain, multiplied by mod and vanilla weather volume without changing propagation range.",
   "notenoughrainsounds.config.thunder_assets": "Thunder Assets Ready: %s/%s",
   "notenoughrainsounds.config.weather_assets_help": "Counts loaded, nonempty events: notenoughrainsounds:weather.rain, weather.rain.above and weather.thunder. Missing variants use vanilla.",
-  "notenoughrainsounds.config.weather_setup_hint": "Background rain follows native triggers; material rain overlaps independently, and thunder keeps native timing.",
+  "notenoughrainsounds.config.weather_setup_hint": "Enable sound packs in Options → Resource Packs. Missing rain or thunder sounds fall back to vanilla.",
   "subtitles.notenoughrainsounds.weather.rain": "Rain patters",
   "subtitles.notenoughrainsounds.weather.thunder": "Thunder rumbles"
 }

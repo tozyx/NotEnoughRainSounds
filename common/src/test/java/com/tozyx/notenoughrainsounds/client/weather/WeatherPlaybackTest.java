@@ -1,5 +1,12 @@
 package com.tozyx.notenoughrainsounds.client.weather;
 
+import net.minecraft.SharedConstants;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.server.Bootstrap;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +27,27 @@ class WeatherPlaybackTest {
         assertEquals(Integer.MAX_VALUE, ThunderSound.range(Float.MAX_VALUE, 256));
         assertEquals(1, ThunderSound.range(-1, 0));
         assertEquals(16, ThunderSound.range(Float.NaN, 16));
+    }
+
+    @Test void coveredThunderEasesBackToDryVolumeWithoutRestarting() {
+        SharedConstants.tryDetectVersion();
+        Bootstrap.bootStrap();
+        var thunder = WeatherSoundPolicy.Event.THUNDER;
+        var original = new SimpleSoundInstance(thunder.original(), SoundSource.WEATHER, 10000, 1,
+                RandomSource.create(1), false, 0, SoundInstance.Attenuation.LINEAR, 20, 65, 0, false) {
+            @Override public float getVolume() { return 10000; }
+            @Override public float getPitch() { return 1; }
+            @Override public net.minecraft.client.resources.sounds.Sound getSound() { return SoundManager.EMPTY_SOUND; }
+        };
+        var sound = new ThunderSound(original, thunder.replacement(), .8, true);
+        assertEquals(.52F, sound.getVolume(), 1e-6);
+        sound.obstructed(false);
+        sound.tick();
+        assertTrue(sound.getVolume() > .52F && sound.getVolume() < .8F);
+        for (int i = 0; i < 3; i++) sound.tick();
+        assertEquals(.8F, sound.getVolume(), 1e-6);
+        assertFalse(sound.isLooping());
+        assertFalse(sound.isStopped());
     }
 
     @Test void thunderProfilesFollowDistanceBoundaries() {

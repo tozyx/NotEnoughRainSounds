@@ -3,7 +3,6 @@ package com.tozyx.notenoughrainsounds.client.weather;
 import com.google.gson.JsonParser;
 import com.tozyx.notenoughrainsounds.client.config.SoundConfig;
 import com.tozyx.notenoughrainsounds.client.mixin.AbstractSoundInstanceAccessor;
-import com.tozyx.notenoughrainsounds.client.rain.OggDuration;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -102,54 +101,9 @@ class NativeRainReplacementTest {
                 }).action());
     }
 
-    @Test void outdoorEventUsesFullSpatialMonoTakesAtReferenceGain() throws Exception {
-        try (var input = getClass().getResourceAsStream("/assets/notenoughrainsounds/sounds.json")) {
-            assertNotNull(input);
-            var events = JsonParser.parseReader(new InputStreamReader(input, StandardCharsets.UTF_8)).getAsJsonObject();
-            var sounds = events.getAsJsonObject("weather.rain").getAsJsonArray("sounds");
-            assertEquals(6, sounds.size());
-            for (int i = 0; i < sounds.size(); i++) {
-                var sound = sounds.get(i).getAsJsonObject();
-                assertEquals("notenoughrainsounds:weather/rain" + (i + 7), sound.get("name").getAsString());
-                assertEquals(.7, sound.get("volume").getAsDouble(), 1e-6);
-                try (var audio = getClass().getResourceAsStream(
-                        "/assets/notenoughrainsounds/sounds/weather/rain" + (i + 7) + ".ogg")) {
-                    assertNotNull(audio);
-                    byte[] bytes = audio.readAllBytes();
-                    assertEquals(1, vorbisChannels(bytes), "World-positioned rain must spatialize");
-                    double seconds = OggDuration.seconds(new java.io.ByteArrayInputStream(bytes)).orElseThrow();
-                    assertTrue(seconds > 2 && seconds < 3);
-                }
-            }
-        }
-    }
-
-    @Test void shelteredEventUsesFilteredMonoRoofSamples() throws Exception {
-        try (var input = getClass().getResourceAsStream("/assets/notenoughrainsounds/sounds.json")) {
-            assertNotNull(input);
-            var events = JsonParser.parseReader(new InputStreamReader(input, StandardCharsets.UTF_8)).getAsJsonObject();
-            var sounds = events.getAsJsonObject("weather.rain.above").getAsJsonArray("sounds");
-            assertEquals(6, sounds.size());
-            for (int i = 0; i < sounds.size(); i++) {
-                assertEquals("notenoughrainsounds:weather/rain_above" + (i + 7),
-                        sounds.get(i).getAsJsonObject().get("name").getAsString());
-            }
-        }
-        try (var input = getClass().getResourceAsStream("/META-INF/licenses/notenoughrainsounds-rain-audio-manifest.json")) {
-            assertNotNull(input);
-            var rows = JsonParser.parseReader(new InputStreamReader(input, StandardCharsets.UTF_8)).getAsJsonArray();
-            int count = 0;
-            for (var value : rows) {
-                var row = value.getAsJsonObject();
-                if (!row.get("output").getAsString().contains("/weather/rain_above")) continue;
-                assertEquals(1, row.get("channels").getAsInt());
-                assertEquals(2800, row.get("source_lowpass_hz").getAsInt());
-                assertEquals(1, row.get("playback_pitch").getAsDouble());
-                assertTrue(row.get("source_gain").getAsDouble() <= 1.5);
-                count++;
-            }
-            assertEquals(6, count);
-        }
+    @Test void modResourcesLeaveSoundRegistrationToExternalPacks() {
+        assertNull(getClass().getResource("/assets/notenoughrainsounds/sounds.json"),
+                "Custom sound events must come from an enabled resource pack");
     }
 
     @Test void wallObstructedNormalRainUsesShelteredGainWithoutSlowingOrMoving() {
@@ -161,15 +115,6 @@ class NativeRainReplacementTest {
         assertEquals(request.getY(), sound.getY());
         assertEquals(request.getZ(), sound.getZ());
         assertFalse(sound.isLooping());
-    }
-
-    private static int vorbisChannels(byte[] bytes) {
-        byte[] marker = {1, 'v', 'o', 'r', 'b', 'i', 's'};
-        outer: for (int i = 0; i + 12 < bytes.length; i++) {
-            for (int j = 0; j < marker.length; j++) if (bytes[i+j] != marker[j]) continue outer;
-            return Byte.toUnsignedInt(bytes[i+11]);
-        }
-        throw new AssertionError("Missing Vorbis identification header");
     }
 
     @Test void nativePropertyAccessorIsRegisteredInSharedClientMixins() throws Exception {

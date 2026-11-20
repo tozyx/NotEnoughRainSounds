@@ -37,9 +37,9 @@ class MaterialPlaybackTest {
 
     @Test void everyMaterialAndDripIsAnIndependentNonLoopingTake() {
         var metal = new MaterialRainSound(RainSound.METAL, 1, 1,
-                net.minecraft.util.RandomSource.create(1), net.minecraft.world.phys.Vec3.ZERO);
+                net.minecraft.util.RandomSource.create(1), net.minecraft.world.phys.Vec3.ZERO, false);
         var drip = new MaterialRainSound(RainSound.PLANT_DRIP, 1, 1,
-                net.minecraft.util.RandomSource.create(2), net.minecraft.world.phys.Vec3.ZERO);
+                net.minecraft.util.RandomSource.create(2), net.minecraft.world.phys.Vec3.ZERO, false);
         assertFalse(metal.isLooping());
         assertEquals(0, metal.getDelay());
         assertFalse(drip.isLooping());
@@ -49,9 +49,26 @@ class MaterialPlaybackTest {
         assertEquals(1, metal.getVolume());
     }
 
+    @Test void shelterStartsQuietAndFadesInWhenThePathClears() {
+        var wood = new MaterialRainSound(RainSound.WOOD, 1, 1,
+                net.minecraft.util.RandomSource.create(1), net.minecraft.world.phys.Vec3.ZERO, true);
+        wood.tick();
+        wood.tick();
+        assertEquals(.35F, wood.getVolume(), 1e-6);
+        wood.obstructed(false);
+        wood.tick();
+        assertTrue(wood.getVolume() > .35F && wood.getVolume() < 1);
+        for (int i = 0; i < 3; i++) wood.tick();
+        assertEquals(1, wood.getVolume(), 1e-6);
+        wood.obstructed(true);
+        for (int i = 0; i < 4; i++) wood.tick();
+        assertEquals(.35F, wood.getVolume(), 1e-6);
+        assertFalse(wood.isStopped());
+    }
+
     @Test void aPlayingTakeFollowsRainIntensityWithoutRestarting() {
         var metal = new MaterialRainSound(RainSound.METAL, .01F, 1,
-                net.minecraft.util.RandomSource.create(3), net.minecraft.world.phys.Vec3.ZERO);
+                net.minecraft.util.RandomSource.create(3), net.minecraft.world.phys.Vec3.ZERO, false);
         for (int i = 0; i < 8; i++) metal.tick();
         assertEquals(.01F, metal.getVolume(), 1.0e-6);
         metal.gain(1);
@@ -66,10 +83,10 @@ class MaterialPlaybackTest {
 
     @Test void startingANewTakeDoesNotReleaseOrReduceTheOlderTake() {
         var older=new MaterialRainSound(RainSound.METAL,.5F,1,
-                net.minecraft.util.RandomSource.create(4),net.minecraft.world.phys.Vec3.ZERO);
+                net.minecraft.util.RandomSource.create(4),net.minecraft.world.phys.Vec3.ZERO, false);
         for(int i=0;i<30;i++) older.tick();
         var newer=new MaterialRainSound(RainSound.METAL,.5F,1,
-                net.minecraft.util.RandomSource.create(5),net.minecraft.world.phys.Vec3.ZERO);
+                net.minecraft.util.RandomSource.create(5),net.minecraft.world.phys.Vec3.ZERO, false);
         for(int i=0;i<2;i++) { older.tick();newer.tick(); }
         assertEquals(.5F,older.getVolume());
         assertEquals(.5F,newer.getVolume());
@@ -106,20 +123,6 @@ class MaterialPlaybackTest {
         assertTrue(OggDuration.seconds(new ByteArrayInputStream(new byte[0])).isEmpty());
         assertTrue(OggDuration.seconds(new ByteArrayInputStream(new byte[]{'O', 'g', 'g'})).isEmpty());
         assertTrue(OggDuration.seconds(new ByteArrayInputStream(new byte[27])).isEmpty());
-    }
-
-    @Test void bundledMaterialsAreIndependentFullOriginalTakes() throws IOException {
-        for (String kind : new String[]{"wood", "metal", "glass", "foliage", "granular", "water", "soft"}) {
-            for (int i = 1; i <= 3; i++) {
-                try (var input = getClass().getResourceAsStream(
-                        "/assets/notenoughrainsounds/sounds/rain/" + kind + "_0" + i + ".ogg")) {
-                    assertNotNull(input);
-                    double seconds = OggDuration.seconds(input).orElseThrow();
-                    assertTrue(seconds >= 3 && seconds < 10,
-                            kind + " must be an independent original take, not a synthesized loop");
-                }
-            }
-        }
     }
 
     private static void page(ByteArrayOutputStream output, byte[] payload, long samples) throws IOException {

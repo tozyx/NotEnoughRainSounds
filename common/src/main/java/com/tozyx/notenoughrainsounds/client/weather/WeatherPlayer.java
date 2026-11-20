@@ -7,7 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.core.SectionPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.phys.Vec3;
@@ -58,6 +57,13 @@ public final class WeatherPlayer {
         }
         long tick = ticks++;
         thunder.removeIf(playing -> tick - playing.started() > 20 && !sounds.isActive(playing.sound()));
+        for (Thunder playing : thunder) {
+            ThunderSound sound = playing.sound();
+            if ((tick - playing.started()) % OcclusionGain.CHECK_INTERVAL_TICKS == 0
+                    && SoundOcclusion.spatial(sound)) {
+                sound.obstructed(SoundOcclusion.blockedNearby(level, previousListener, sound.tracePoint()));
+            }
+        }
         if (!config.weather.rain.enabled || config.volume * config.weather.rain.volume <= 0) {
             clearRain(sounds);
             return;
@@ -80,7 +86,9 @@ public final class WeatherPlayer {
             // as weather.rain: use the filtered profile when the actual path is obstructed.
             ResourceLocation event = decision.event();
             if (original.getLocation().equals(WeatherSoundPolicy.Event.RAIN.original())
-                    && rainObstructed(minecraft, original)) {
+                    && SoundOcclusion.spatial(original)
+                    && SoundOcclusion.rainBlocked(level, previousListener,
+                            new Vec3(original.getX(), original.getY(), original.getZ()))) {
                 event = WeatherSoundPolicy.Event.RAIN_ABOVE.replacement();
                 if (!available(sounds, event)) return false;
             }
@@ -97,34 +105,18 @@ public final class WeatherPlayer {
         if (original.resolve(sounds) == null || original.getSound() == SoundManager.EMPTY_SOUND
                 || original.getSound() == SoundManager.INTENTIONALLY_EMPTY_SOUND) return false;
         updateWorld(minecraft);
-        Vec3 listener = minecraft.gameRenderer.getMainCamera().getPosition();
-        double distance = original.isRelative() ? 0 : listener.distanceToSqr(original.getX(), original.getY(), original.getZ());
+        Vec3 source = new Vec3(original.getX(), original.getY(), original.getZ());
+        double distance = original.isRelative() ? 0 : previousListener.distanceToSqr(source);
         ResourceLocation profile = ThunderSound.profile(distance);
         ResourceLocation event = available(sounds, profile) ? profile : decision.event();
-        ThunderSound sound = new ThunderSound(original, event, decision.volumeMultiplier());
+        boolean blocked = SoundOcclusion.spatial(original)
+                && SoundOcclusion.blockedNearby(level, previousListener, source.add(0, .05, 0));
+        ThunderSound sound = new ThunderSound(original, event, decision.volumeMultiplier(), blocked);
         // Bound extreme command/mod-driven storms without tying thunder to the material-drop budget.
         if (thunder.size() >= 8) sounds.stop(thunder.removeFirst().sound());
         sounds.play(sound);
         thunder.add(new Thunder(sound, ticks));
         return true;
-    }
-
-    private static boolean rainObstructed(Minecraft minecraft, SoundInstance original) {
-        if (original.isRelative() || original.getAttenuation() == SoundInstance.Attenuation.NONE) return false;
-        Vec3 listener = minecraft.gameRenderer.getMainCamera().getPosition();
-        Vec3 source = new Vec3(original.getX(), original.getY(), original.getZ());
-        // Native rain is local. Do not trace arbitrary long command/mod requests or load chunks.
-        if (listener.distanceToSqr(source) > 32 * 32) return false;
-        int minX = SectionPos.blockToSectionCoord((int) Math.floor(Math.min(listener.x, source.x)));
-        int maxX = SectionPos.blockToSectionCoord((int) Math.floor(Math.max(listener.x, source.x)));
-        int minZ = SectionPos.blockToSectionCoord((int) Math.floor(Math.min(listener.z, source.z)));
-        int maxZ = SectionPos.blockToSectionCoord((int) Math.floor(Math.max(listener.z, source.z)));
-        for (int x = minX; x <= maxX; x++) {
-            for (int z = minZ; z <= maxZ; z++) {
-                if (!minecraft.level.hasChunk(x, z)) return false;
-            }
-        }
-        return RainOcclusion.blocked(minecraft.level, listener, source);
     }
 
     public static boolean available(SoundManager sounds, ResourceLocation id) {

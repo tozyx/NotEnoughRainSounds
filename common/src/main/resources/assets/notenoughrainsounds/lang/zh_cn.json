@@ -32,7 +32,7 @@
   "notenoughrainsounds.config.material_enabled": "启用该音效",
   "notenoughrainsounds.config.material_enabled_help": "控制该类细节声音，背景雨声单独设置。",
   "notenoughrainsounds.config.material_volume": "该音效音量",
-  "notenoughrainsounds.config.material_volume_help": "只调整该材质或植物滴水的音量。",
+  "notenoughrainsounds.config.material_volume_help": "只调整该材质或植物滴水的音量。隔着屋顶或墙的声音会变轻。",
   "notenoughrainsounds.config.probability": "触发概率",
   "notenoughrainsounds.config.probability_help": "仅控制植物偶发滴水的每次尝试概率，普通材质声会持续播放。",
   "notenoughrainsounds.config.interval": "尝试间隔",
@@ -88,12 +88,12 @@
   "notenoughrainsounds.config.ambience_volume_help": "Mod 背景雨声音量，与 Mod 总音量相乘；和材质雨滴、植物滴水分别控制。",
   "notenoughrainsounds.config.rain_assets": "雨声素材就绪：%s/%s",
   "notenoughrainsounds.config.replace_thunder": "替换雷声",
-  "notenoughrainsounds.config.replace_thunder_help": "替换闪电产生的雷声，按距离选择近、中、远素材；不改变闪电或其撞击声。",
+  "notenoughrainsounds.config.replace_thunder_help": "按距离选择近、中、远雷声。墙或屋顶遮挡时，雷声会稍微变轻。",
   "notenoughrainsounds.config.thunder_volume": "雷声音量",
   "notenoughrainsounds.config.thunder_volume_help": "替代雷声音量，与 Mod 总音量相乘，并受原版天气音量控制；不改变传播范围。",
   "notenoughrainsounds.config.thunder_assets": "雷声素材就绪：%s/%s",
   "notenoughrainsounds.config.weather_assets_help": "统计已加载的非空事件。雨声需要 notenoughrainsounds:weather.rain 和 weather.rain.above；雷声需要 weather.thunder。缺少对应素材时保留原版。",
-  "notenoughrainsounds.config.weather_setup_hint": "背景雨声沿用原版触发；材质雨声独立叠加，雷声沿用原版时机。",
+  "notenoughrainsounds.config.weather_setup_hint": "在“选项 → 资源包”启用音效包。缺少雨声或雷声素材时使用原版。",
   "subtitles.notenoughrainsounds.weather.rain": "雨声沙沙",
   "subtitles.notenoughrainsounds.weather.thunder": "雷声轰鸣"
 }

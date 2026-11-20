@@ -2,6 +2,8 @@ package com.tozyx.notenoughrainsounds.client.rain;
 
 import com.tozyx.notenoughrainsounds.NotEnoughRainSounds;
 import com.tozyx.notenoughrainsounds.client.config.SoundConfig;
+import com.tozyx.notenoughrainsounds.client.weather.OcclusionGain;
+import com.tozyx.notenoughrainsounds.client.weather.SoundOcclusion;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -72,6 +74,9 @@ public final class RainPlayer {
                 if (!playing.instance().releasing()) plan.retry(playing.group());
                 playing.instance().release();
             } else {
+                if ((tick - playing.startedAt()) % OcclusionGain.CHECK_INTERVAL_TICKS == 0) {
+                    playing.instance().obstructed(SoundOcclusion.blockedNearby(world, listener, playing.instance().position()));
+                }
                 playing.instance().gain(gain(config, world, playing.group().sound()) * playing.layerGain());
             }
             occupied.add(playing.group()); // Existing takes continue while the next independent voice starts.
@@ -95,7 +100,8 @@ public final class RainPlayer {
             float gain = gain(config, world, kind);
             float pitch = 0.95F + random.nextFloat() * 0.1F;
             Vec3 position = fresh.position();
-            MaterialRainSound instance = new MaterialRainSound(kind, gain, pitch, random, position);
+            boolean blocked = SoundOcclusion.blockedNearby(world, listener, position.add(0, MaterialRainSound.SURFACE_OFFSET, 0));
+            MaterialRainSound instance = new MaterialRainSound(kind, gain, pitch, random, position, blocked);
             if (instance.resolve(sounds) == null || instance.getSound() == SoundManager.EMPTY_SOUND
                     || instance.getSound() == SoundManager.INTENTIONALLY_EMPTY_SOUND) continue;
             OptionalDouble seconds = durations.computeIfAbsent(instance.getSound().getPath(),

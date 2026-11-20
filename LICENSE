@@ -13,11 +13,11 @@ It is provided without any warranty; see the full GPL text for details.
 
 Audio and other third-party assets retain their own licenses and attribution;
 this GPL grant and the Minecraft exception do not relicense those assets.
-The 24 bundled rain cues come from The Sound of Rain / JShep (upstream project
-MIT declaration checked on 2026-10-14). Original recording credits and remaining
-provenance gaps are documented in the existing audio notice and per-file
-manifest; preserve those records. No new upstream authorship or permission
-is asserted here.
+The archived rain and thunder recordings come from The Sound of Rain / JShep
+(upstream project MIT declaration checked on 2026-10-14). The original audio
+notice and per-file manifest accompany the archived assets in
+soundResource/archives/NERS-Legacy-Audio. Preserve these records with the
+recordings. No new upstream authorship or permission is asserted here.
 
 Reference audio under soundResource/ is not included in the mod jars; each
 file retains its upstream terms. Source-specific records include
@@ -26,9 +26,9 @@ Future original or AI-generated audio will have its rights and license
 recorded individually; no blanket new audio license is granted here.
 
 This combined LICENSE is included under META-INF/licenses/ in release and
-source jars, alongside the unchanged the-sound-of-rain.txt attribution and
-notenoughrainsounds-rain-audio-manifest.json. In the repository, see
-common/src/main/resources/META-INF/licenses/ and docs/rain-audio-manifest.json.
+source jars. The separate legacy audio archive retains the-sound-of-rain.txt
+and notenoughrainsounds-rain-audio-manifest.json. A copy of the archive's
+per-file manifest is available in docs/rain-audio-manifest.json.
 
 ----- BEGIN UNMODIFIED GNU GPL VERSION 3 TEXT -----
 
