@@ -10,6 +10,7 @@ import java.util.Map;
 public final class SoundConfig {
     public int schemaVersion = 1;
     public boolean enabled = true;
+    public boolean smoothPause = true;
     public double volume = 1.0;
     public Rain rain = new Rain();
     public Weather weather = new Weather();

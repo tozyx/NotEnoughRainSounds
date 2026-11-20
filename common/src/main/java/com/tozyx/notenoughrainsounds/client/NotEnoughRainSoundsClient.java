@@ -48,6 +48,11 @@ public final class NotEnoughRainSoundsClient {
         RAIN.configure(config.current().rain);
     }
 
+    /** Global pause smoothing is independent of material, background and thunder switches. */
+    public static boolean smoothPauseEnabled() {
+        return config != null && config.current().enabled && config.current().smoothPause;
+    }
+
     public static boolean replaceWeatherSound(SoundInstance sound) {
         return config != null && WEATHER.replace(Minecraft.getInstance(), config.current(), sound);
     }

@@ -7,7 +7,9 @@
     "MinecraftMixin",
     "SoundOptionsScreenMixin",
     "SoundEngineMixin",
-    "AbstractSoundInstanceAccessor"
+    "AbstractSoundInstanceAccessor",
+    "SoundEnginePauseMixin",
+    "ChannelPauseMixin"
   ],
   "injectors": {
     "defaultRequire": 1

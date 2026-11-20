@@ -86,6 +86,7 @@ public final class SoundConfigScreen extends Screen {
     private void general() {
         toggle("enabled", draft.enabled, value -> draft.enabled = value);
         percent("volume", draft.volume, value -> draft.volume = value);
+        toggle("smooth_pause", draft.smoothPause, value -> draft.smoothPause = value);
         toggle("rain_enabled", draft.rain.enabled, value -> draft.rain.enabled = value);
         percent("rain_volume", draft.rain.volume, value -> draft.rain.volume = value);
         link(text("materials"), () -> navigate(Page.MATERIALS), "materials_help");
