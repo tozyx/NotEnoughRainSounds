@@ -50,11 +50,13 @@ public final class MaterialResolver {
         for (Rule rule : overrides) {
             if (rule.selector.matches(state)) return rule.material;
         }
+        if (state.is(Blocks.BIG_DRIPLEAF) || state.is(Blocks.SMALL_DRIPLEAF)
+                || state.is(Blocks.LILY_PAD) || state.is(Blocks.SEAGRASS) || state.is(Blocks.TALL_SEAGRASS)
+                || state.is(Blocks.KELP) || state.is(Blocks.KELP_PLANT)) return RainMaterial.AQUATIC_PLANT;
         if (waterSurface) return RainMaterial.WATER;
         if (state.getFluidState().is(FluidTags.LAVA) || state.is(Blocks.MAGMA_BLOCK)
                 || CampfireBlock.isLitCampfire(state)) return RainMaterial.VANILLA;
-        if (state.is(BlockTags.LEAVES) || state.is(Blocks.BIG_DRIPLEAF) || state.is(Blocks.SMALL_DRIPLEAF)
-                || state.is(Blocks.LILY_PAD)) return RainMaterial.FOLIAGE;
+        if (state.is(BlockTags.LEAVES)) return RainMaterial.FOLIAGE;
         if (state.is(BlockTags.PLANKS) || state.is(BlockTags.LOGS) || state.is(BlockTags.ALL_SIGNS)) return RainMaterial.WOOD;
         if (state.is(BlockTags.WOOL) || state.is(BlockTags.WOOL_CARPETS) || state.is(BlockTags.SNOW)) return RainMaterial.SOFT;
         if (state.is(BlockTags.TERRACOTTA) || state.is(Blocks.TERRACOTTA) || state.getBlock() instanceof GlazedTerracottaBlock

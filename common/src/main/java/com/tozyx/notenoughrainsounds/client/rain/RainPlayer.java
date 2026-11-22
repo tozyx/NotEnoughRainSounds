@@ -75,7 +75,8 @@ public final class RainPlayer {
                 playing.instance().release();
             } else {
                 if ((tick - playing.startedAt()) % OcclusionGain.CHECK_INTERVAL_TICKS == 0) {
-                    playing.instance().obstructed(SoundOcclusion.blockedNearby(world, listener, playing.instance().position()));
+                    playing.instance().obstructed(SoundOcclusion.materialBlocked(world, listener,
+                            playing.instance().position(), playing.group().sound()));
                 }
                 playing.instance().gain(gain(config, world, playing.group().sound()) * playing.layerGain());
             }
@@ -100,7 +101,8 @@ public final class RainPlayer {
             float gain = gain(config, world, kind);
             float pitch = 0.95F + random.nextFloat() * 0.1F;
             Vec3 position = fresh.position();
-            boolean blocked = SoundOcclusion.blockedNearby(world, listener, position.add(0, MaterialRainSound.SURFACE_OFFSET, 0));
+            boolean blocked = SoundOcclusion.materialBlocked(world, listener,
+                    position.add(0, MaterialRainSound.SURFACE_OFFSET, 0), kind);
             MaterialRainSound instance = new MaterialRainSound(kind, gain, pitch, random, position, blocked);
             if (instance.resolve(sounds) == null || instance.getSound() == SoundManager.EMPTY_SOUND
                     || instance.getSound() == SoundManager.INTENTIONALLY_EMPTY_SOUND) continue;

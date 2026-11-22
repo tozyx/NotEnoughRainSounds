@@ -71,6 +71,17 @@ class RainOcclusionTest {
         assertFalse(SoundOcclusion.blockedNearby(scene, new Vec3(.5, 71, .5), impact, pos -> true));
     }
 
+    @Test void canopyRainPassesThroughLayersOfLeavesButStillMeetsASolidRoof() {
+        var scene = new Scene();
+        scene.blocks.put(new BlockPos(0, 67, 0), Blocks.BIRCH_LEAVES.defaultBlockState());
+        scene.blocks.put(new BlockPos(0, 68, 0), Blocks.OAK_LEAVES.defaultBlockState());
+        var impact = new Vec3(.5, 69.05, .5);
+        assertFalse(SoundOcclusion.blockedNearby(scene, LISTENER, impact, pos -> true, true));
+        assertTrue(SoundOcclusion.blockedNearby(scene, LISTENER, impact, pos -> true));
+        scene.blocks.put(new BlockPos(0, 66, 0), Blocks.GLASS.defaultBlockState());
+        assertTrue(SoundOcclusion.blockedNearby(scene, LISTENER, impact, pos -> true, true));
+    }
+
     @Test void distantThunderMeetsLocalCoverEvenIfTheStrikeIsOutsideLoadedChunks() {
         var scene = new Scene();
         scene.wall();

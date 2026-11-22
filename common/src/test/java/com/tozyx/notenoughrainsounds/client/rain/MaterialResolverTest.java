@@ -10,6 +10,7 @@ import net.minecraft.server.Bootstrap;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.BeforeAll;
@@ -25,9 +26,16 @@ class MaterialResolverTest {
     @Test void recognizesMetalAndDistinctPlantAndWaterSurfaces() {
         MaterialResolver resolver = new MaterialResolver(new SoundConfig().rain);
         assertEquals(RainMaterial.METAL, resolver.resolve(Blocks.COPPER_BLOCK.defaultBlockState(), false).material());
-        var plant = resolver.resolve(Blocks.BIG_DRIPLEAF.defaultBlockState(), false);
-        assertEquals(RainMaterial.FOLIAGE, plant.material());
-        assertTrue(plant.plantDrips());
+        for (Block block : List.of(Blocks.BIG_DRIPLEAF, Blocks.SMALL_DRIPLEAF)) {
+            var state = block.defaultBlockState();
+            var plant = resolver.resolve(state, false);
+            assertEquals(RainSound.AQUATIC_PLANT, RainSound.forMaterial(plant.material()));
+            assertTrue(plant.plantDrips());
+            var waterlogged = state.setValue(BlockStateProperties.WATERLOGGED, true);
+            assertEquals(RainMaterial.AQUATIC_PLANT, resolver.resolve(waterlogged, true).material());
+        }
+        assertEquals(RainMaterial.AQUATIC_PLANT, resolver.resolve(Blocks.LILY_PAD.defaultBlockState(), false).material());
+        assertEquals(RainMaterial.AQUATIC_PLANT, resolver.resolve(Blocks.SEAGRASS.defaultBlockState(), true).material());
         var water = resolver.resolve(Blocks.WATER.defaultBlockState(), true);
         assertEquals(RainMaterial.WATER, water.material());
         assertFalse(water.plantDrips());

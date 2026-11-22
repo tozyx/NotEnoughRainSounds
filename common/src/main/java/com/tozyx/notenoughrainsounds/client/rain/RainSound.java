@@ -14,6 +14,7 @@ public enum RainSound {
     GLASS(RainMaterial.GLASS, "glass"),
     FOLIAGE(RainMaterial.FOLIAGE, "foliage"),
     GRANULAR(RainMaterial.GRANULAR, "granular"),
+    AQUATIC_PLANT(RainMaterial.AQUATIC_PLANT, "aquatic_plant"),
     WATER(RainMaterial.WATER, "water"),
     SOFT(RainMaterial.SOFT, "soft"),
     PLANT_DRIP(null, "plant_drip");
@@ -50,6 +51,7 @@ public enum RainSound {
             case GLASS -> GLASS;
             case FOLIAGE -> FOLIAGE;
             case GRANULAR -> GRANULAR;
+            case AQUATIC_PLANT -> AQUATIC_PLANT;
             case WATER -> WATER;
             case SOFT -> SOFT;
             default -> null;
