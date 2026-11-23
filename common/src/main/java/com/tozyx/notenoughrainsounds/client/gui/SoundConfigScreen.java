@@ -114,6 +114,7 @@ public final class SoundConfigScreen extends Screen {
     }
 
     private void materials() {
+        toggle("boat_impacts", draft.rain.boatImpacts, value -> draft.rain.boatImpacts = value);
         for (RainMaterial type : RainMaterial.values()) {
             if (type == RainMaterial.VANILLA) continue;
             SoundConfig.Material material = draft.rain.materials.get(type.id());

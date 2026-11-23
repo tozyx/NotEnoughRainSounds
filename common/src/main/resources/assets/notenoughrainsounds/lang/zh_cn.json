@@ -28,6 +28,8 @@
   "notenoughrainsounds.config.rain_volume": "材质雨滴音量",
   "notenoughrainsounds.config.rain_volume_help": "统一控制材质雨滴与植物滴水的音量，和背景雨声分别调整。",
   "notenoughrainsounds.config.materials_help": "分别调整每类材质和植物滴水。",
+  "notenoughrainsounds.config.boat_impacts": "船只雨声",
+  "notenoughrainsounds.config.boat_impacts_help": "让露天且未浸没的船只使用木质雨声，需要启用木质音效及其资源包。",
   "notenoughrainsounds.config.material_help": "受雨材质持续发声，可调整开关、音量和排除规则。石质、陶质、地面暂未附带音频。",
   "notenoughrainsounds.config.plant_help": "植物上的偶发滴水层，不受植被材质开关单独控制。",
   "notenoughrainsounds.config.back_materials": "返回材质列表",

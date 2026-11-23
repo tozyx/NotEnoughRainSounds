@@ -72,8 +72,14 @@ public final class RainPlayer {
             if (fresh == null || !playing.group().sound().accepts(fresh)
                     || fresh.position().distanceToSqr(listener) >= audibleDistanceSquared()) {
                 if (!playing.instance().releasing()) plan.retry(playing.group());
+                if (playing.surface().onBoat()) {
+                    sounds.stop(playing.instance());
+                    iterator.remove();
+                    continue;
+                }
                 playing.instance().release();
             } else {
+                if (fresh.onBoat()) playing.instance().moveTo(fresh.position());
                 if ((tick - playing.startedAt()) % OcclusionGain.CHECK_INTERVAL_TICKS == 0) {
                     playing.instance().obstructed(SoundOcclusion.materialBlocked(world, listener,
                             playing.instance().position(), playing.group().sound()));
@@ -83,19 +89,21 @@ public final class RainPlayer {
             occupied.add(playing.group()); // Existing takes continue while the next independent voice starts.
         }
 
-        List<RainSurface> candidates = sampler.surfaces().stream()
-                .filter(surface -> surface.position().distanceToSqr(listener) < audibleDistanceSquared()).toList();
         Set<RainSound> available = EnumSet.noneOf(RainSound.class);
         for (RainSound kind : RainSound.values()) {
             var event = sounds.getSoundEvent(kind.id());
             if (event != null && event.getWeight() > 0) available.add(kind);
         }
+        List<RainSurface> candidates = sampler.surfaces(world, listener, minecraft.player.getVehicle(),
+                available.contains(RainSound.WOOD));
+        candidates.removeIf(surface -> surface.position().distanceToSqr(listener) >= audibleDistanceSquared());
         for (RainPlaybackPlan.Request request : plan.poll(tick, candidates, config, available, occupied,
                 config.rain.maxActiveSounds - new HashSet<>(occupied).size(), random, listener)) {
             RainSound kind = request.group().sound();
             RainSurface fresh = sampler.revalidate(world, listener, request.surface());
             // Recheck the actual top surface, not just the cached block/material.
-            if (fresh == null || !kind.accepts(fresh)) continue;
+            if (fresh == null || !kind.accepts(fresh)
+                    || fresh.onBoat() && fresh.position().distanceToSqr(listener) >= audibleDistanceSquared()) continue;
             var event = sounds.getSoundEvent(kind.id());
             if (event == null || event.getWeight() == 0) continue;
             float gain = gain(config, world, kind);

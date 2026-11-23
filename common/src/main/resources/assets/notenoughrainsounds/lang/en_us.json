@@ -28,6 +28,8 @@
   "notenoughrainsounds.config.rain_volume": "Material Drops Volume",
   "notenoughrainsounds.config.rain_volume_help": "Volume multiplier for material impacts and plant drips, separate from background rain.",
   "notenoughrainsounds.config.materials_help": "Adjust each material and plant drips independently.",
+  "notenoughrainsounds.config.boat_impacts": "Rain on Boats",
+  "notenoughrainsounds.config.boat_impacts_help": "Play wood impacts on boats exposed to rain above the water. Requires wood impacts and a wood sound pack.",
   "notenoughrainsounds.config.material_help": "Exposed materials play continuously. Adjust volume, enablement and exclusions. Stone, ceramic and ground audio is not bundled yet.",
   "notenoughrainsounds.config.plant_help": "Occasional drips from plants. Independent of the foliage material switch.",
   "notenoughrainsounds.config.back_materials": "Back to Materials",

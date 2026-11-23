@@ -28,6 +28,7 @@ public final class SoundConfig {
 
     public static final class Rain {
         public boolean enabled = true;
+        public boolean boatImpacts = true;
         public double volume = 1.0;
         public int radius = 12;
         public int verticalRange = 16;

@@ -26,9 +26,7 @@ final class MaterialRainSound extends AbstractTickableSoundInstance {
         this.sustained = kind != RainSound.PLANT_DRIP;
         this.gain = gain;
         this.pitch = pitch;
-        x = point.x;
-        y = point.y + SURFACE_OFFSET;
-        z = point.z;
+        moveTo(point);
         attenuation = Attenuation.LINEAR;
         relative = false;
         looping = false;
@@ -57,6 +55,12 @@ final class MaterialRainSound extends AbstractTickableSoundInstance {
 
     void obstructed(boolean blocked) {
         shelter.target(blocked);
+    }
+
+    void moveTo(Vec3 point) {
+        x = point.x;
+        y = point.y + SURFACE_OFFSET;
+        z = point.z;
     }
 
     Vec3 position() { return new Vec3(x, y, z); }

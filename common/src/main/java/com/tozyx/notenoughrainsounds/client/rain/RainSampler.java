@@ -2,6 +2,7 @@ package com.tozyx.notenoughrainsounds.client.rain;
 
 import com.tozyx.notenoughrainsounds.NotEnoughRainSounds;
 import com.tozyx.notenoughrainsounds.client.config.SoundConfig;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,6 +26,7 @@ import org.joml.Vector3f;
 /** Budgeted surface detection; playback reuses this query to reject stale samples. */
 public final class RainSampler {
     private final Map<Long, RainSurface> surfaces = new HashMap<>();
+    private final BoatRainSampler boats = new BoatRainSampler();
     private ClientLevel level;
     private ColumnScanPlan plan;
     private MaterialResolver resolver;
@@ -39,14 +43,22 @@ public final class RainSampler {
 
     public void clear() {
         surfaces.clear();
+        boats.clear();
         level = null;
         lastCenter = null;
         ticks = 0;
         if (plan != null) plan.reset();
     }
 
-    public List<RainSurface> surfaces() {
-        return List.copyOf(surfaces.values());
+    public List<RainSurface> surfaces(ClientLevel world, Vec3 listener, Entity vehicle, boolean woodAvailable) {
+        List<RainSurface> candidates = new ArrayList<>(surfaces.values());
+        if (woodAvailable && settings != null && settings.boatImpacts && world.getRainLevel(1.0F) > 0) {
+            SoundConfig.Material wood = settings.materials.get(RainMaterial.WOOD.id());
+            if (wood.enabled && wood.volume > 0) {
+                candidates.addAll(boats.sample(world, listener, vehicle, settings, ticks));
+            }
+        }
+        return candidates;
     }
 
     public void tick(ClientLevel world, Vec3 listener) {
@@ -57,6 +69,7 @@ public final class RainSampler {
         }
         if (!settings.enabled || world.getRainLevel(1.0F) <= 0.0F) {
             surfaces.clear();
+            boats.clear();
             ticks = 0;
             plan.reset();
             return;
@@ -66,6 +79,7 @@ public final class RainSampler {
                 || Math.abs(center.getZ() - lastCenter.getZ()) > settings.radius
                 || Math.abs(center.getY() - lastCenter.getY()) > settings.verticalRange)) {
             surfaces.clear();
+            boats.clear();
             plan.reset();
         }
         lastCenter = center;
@@ -96,6 +110,10 @@ public final class RainSampler {
 
     public RainSurface revalidate(ClientLevel world, Vec3 listener, RainSurface cached) {
         if (settings == null || !settings.enabled || world.getRainLevel(1.0F) <= 0) return null;
+        if (cached.onBoat()) {
+            if (!settings.boatImpacts || !(world.getEntity(cached.boatId()) instanceof Boat boat)) return null;
+            return BoatRainSampler.inspect(world, listener, boat, cached.riddenBoat(), settings, ticks);
+        }
         RainSurface current = inspect(world, listener, cached.block().getX(), cached.block().getZ(), ticks);
         long key = ((long) cached.block().getX() << 32) | (cached.block().getZ() & 0xffffffffL);
         // A removed/covered anchor must not remain a preferred stale candidate until the next scan pass.

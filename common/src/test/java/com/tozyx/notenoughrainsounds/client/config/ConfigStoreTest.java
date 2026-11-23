@@ -9,6 +9,21 @@ import static org.junit.jupiter.api.Assertions.*;
 class ConfigStoreTest {
     @TempDir Path directory;
 
+    @Test void boatImpactsDefaultOnForOldConfigsAndCanBeSavedOff() throws Exception {
+        Path path = directory.resolve("notenoughrainsounds-client.json");
+        Files.writeString(path, "{\"schemaVersion\":1,\"rain\":{\"radius\":10}}");
+        var store = new ConfigStore(directory);
+        assertTrue(store.reload());
+        assertTrue(store.current().rain.boatImpacts);
+
+        var draft = store.snapshot();
+        draft.rain.boatImpacts = false;
+        store.save(draft);
+        assertTrue(store.reload());
+        assertFalse(store.current().rain.boatImpacts);
+        assertEquals(10, store.current().rain.radius);
+    }
+
     @Test void createsPortableDefaultsAndRoundTripsSelectors() throws Exception {
         ConfigStore store = new ConfigStore(directory);
         assertTrue(store.reload());

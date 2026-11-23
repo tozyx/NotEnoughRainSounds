@@ -185,6 +185,29 @@ class RainPlaybackPlanTest {
                 RandomSource.create(15),LISTENER).size());
     }
 
+    @Test void riddenBoatTakesPriorityWithinTheWoodLayer() {
+        var plank = surface(0, 0, RainMaterial.WOOD, true, false);
+        var hull = new RainSurface(new BlockPos(2, 64, 0), new Vec3(2.5, 65, .5), plank.match(), 0, 42, true);
+        var requests = new RainPlaybackPlan().poll(0, List.of(plank, hull), new SoundConfig(), AVAILABLE,
+                List.of(), 1, RandomSource.create(20), LISTENER);
+        assertEquals(hull, requests.getFirst().surface());
+        assertEquals(group(RainSound.WOOD), requests.getFirst().group());
+    }
+
+    @Test void movingBoatRetainsItsCooldownAcrossBlockBoundariesAndRetry() {
+        var match = new MaterialResolver.Match(RainMaterial.WOOD, true, false);
+        var first = new RainSurface(new BlockPos(0, 64, 0), LISTENER, match, 0, 42, true);
+        var moved = new RainSurface(new BlockPos(1, 64, 0), LISTENER.add(1, 0, 0), match, 2, 42, true);
+        var plan = new RainPlaybackPlan();
+        var config = new SoundConfig();
+        var random = RandomSource.create(21);
+        assertEquals(1, plan.poll(0, List.of(first), config, AVAILABLE, List.of(), 1, random, LISTENER).size());
+        plan.retry(group(RainSound.WOOD));
+        assertTrue(plan.poll(2, List.of(moved), config, AVAILABLE, List.of(), 1, random, LISTENER).isEmpty());
+        assertEquals(moved, plan.poll(34, List.of(moved), config, AVAILABLE, List.of(), 1, random, LISTENER)
+                .getFirst().surface());
+    }
+
     @Test void nearbyRealPositionsAreFavoredWithoutCollapsingSpatialMixing() {
         var near=surface(0,0,RainMaterial.WOOD,true,false);
         var far=surface(7,7,RainMaterial.WOOD,true,false);

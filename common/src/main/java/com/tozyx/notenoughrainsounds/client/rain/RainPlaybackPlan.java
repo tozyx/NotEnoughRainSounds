@@ -19,12 +19,12 @@ public final class RainPlaybackPlan {
     static final int MAX_VOICES_PER_KIND = 8;
     static final int MAX_VOICES = 64;
     private final Map<Group, Long> nextStart = new HashMap<>();
-    private final Map<Source, Long> blockReady = new HashMap<>();
+    private final Map<Source, Long> sourceReady = new HashMap<>();
     private long nextDispatch;
 
     public void clear() {
         nextStart.clear();
-        blockReady.clear();
+        sourceReady.clear();
         nextDispatch = 0;
     }
 
@@ -48,8 +48,8 @@ public final class RainPlaybackPlan {
         nextStart.keySet().retainAll(groups.keySet());
         Set<Source> validSources = new HashSet<>();
         groups.forEach((group, candidates) -> candidates.forEach(surface ->
-                validSources.add(new Source(group.sound(), surface.block().asLong()))));
-        blockReady.keySet().retainAll(validSources);
+                validSources.add(Source.at(group.sound(), surface))));
+        sourceReady.keySet().retainAll(validSources);
         if (tick < nextDispatch || occupied.size() >= MAX_VOICES) return List.of();
         Map<Group, Integer> counts = new HashMap<>();
         for (Group group : occupied) counts.merge(group, 1, Integer::sum);
@@ -72,26 +72,31 @@ public final class RainPlaybackPlan {
                     ? tick + random.nextInt(settings.attemptIntervalTicks) : tick);
             if (tick < due) continue;
             List<RainSurface> eligible = groups.get(group).stream().filter(surface ->
-                    drip || tick >= blockReady.getOrDefault(new Source(group.sound(), surface.block().asLong()), 0L)).toList();
+                    drip || tick >= sourceReady.getOrDefault(Source.at(group.sound(), surface), 0L)).toList();
             if (eligible.isEmpty()) continue;
             if (drip) {
                 nextStart.put(group, tick + settings.attemptIntervalTicks);
                 if (random.nextDouble() >= settings.triggerProbability) continue;
             }
-            double nearest = eligible.stream().mapToDouble(surface ->
-                    Math.sqrt(surface.position().distanceToSqr(listener))).min().orElseThrow();
-            List<RainSurface> local = eligible.stream().filter(surface ->
-                    surface.position().distanceToSqr(listener) <= (nearest + 4) * (nearest + 4)).toList();
-            RainSurface surface = chooseSurface(local, listener, random);
+            RainSurface surface = eligible.stream().filter(RainSurface::riddenBoat).findFirst()
+                    .orElseGet(() -> chooseLocalSurface(eligible, listener, random));
             if (!drip) {
                 nextStart.put(group, tick + BLOCK_COOLDOWN_TICKS + random.nextInt(5));
-                blockReady.put(new Source(group.sound(), surface.block().asLong()),
+                sourceReady.put(Source.at(group.sound(), surface),
                         tick + BLOCK_COOLDOWN_TICKS + random.nextInt(3));
             }
             nextDispatch = tick + DISPATCH_SPACING_TICKS;
             return List.of(new Request(group, surface));
         }
         return List.of();
+    }
+
+    private static RainSurface chooseLocalSurface(List<RainSurface> candidates, Vec3 listener, RandomSource random) {
+        double nearest = candidates.stream().mapToDouble(surface ->
+                Math.sqrt(surface.position().distanceToSqr(listener))).min().orElseThrow();
+        List<RainSurface> local = candidates.stream().filter(surface ->
+                surface.position().distanceToSqr(listener) <= (nearest + 4) * (nearest + 4)).toList();
+        return chooseSurface(local, listener, random);
     }
 
     static RainSurface chooseSurface(List<RainSurface> candidates, Vec3 listener, RandomSource random) {
@@ -117,7 +122,13 @@ public final class RainPlaybackPlan {
         groups.computeIfAbsent(group, key -> new ArrayList<>()).add(surface);
     }
 
-    private record Source(RainSound sound, long block) {}
+    private record Source(RainSound sound, long key, boolean boat) {
+        static Source at(RainSound sound, RainSurface surface) {
+            return surface.onBoat() ? new Source(sound, surface.boatId(), true)
+                    : new Source(sound, surface.block().asLong(), false);
+        }
+    }
+
     public record Group(int x, int z, RainSound sound) {}
     public record Request(Group group, RainSurface surface) {}
 }
