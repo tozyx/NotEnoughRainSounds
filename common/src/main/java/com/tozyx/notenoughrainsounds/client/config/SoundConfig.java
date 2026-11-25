@@ -11,6 +11,11 @@ public final class SoundConfig {
     public int schemaVersion = 1;
     public boolean enabled = true;
     public boolean smoothPause = true;
+    public boolean rainLowPass = true;
+    public int backgroundCutoffHz = 2600;
+    public int materialCutoffHz = 4000;
+    public static final int MIN_CUTOFF_HZ = 500;
+    public static final int MAX_CUTOFF_HZ = 12000;
     public double volume = 1.0;
     public Rain rain = new Rain();
     public Weather weather = new Weather();
@@ -18,12 +23,21 @@ public final class SoundConfig {
     /** Background replacements are independent of material drops and their sampler. */
     public static final class Weather {
         public Replacement rain = new Replacement();
-        public Replacement thunder = new Replacement();
+        public Thunder thunder = new Thunder();
     }
 
-    public static final class Replacement {
+    public static class Replacement {
         public boolean enabled = true;
         public double volume = 1.0;
+    }
+
+    public static final class Thunder extends Replacement {
+        public static final int HARD_LIMIT = 10;
+        public int maxConcurrent = HARD_LIMIT;
+
+        public boolean hasRoom(int occupied) {
+            return occupied < Math.min(maxConcurrent, HARD_LIMIT);
+        }
     }
 
     public static final class Rain {
@@ -75,9 +89,12 @@ public final class SoundConfig {
     public void validate() {
         if (schemaVersion != 1) throw new IllegalArgumentException("Unsupported config schema: " + schemaVersion);
         volume = unit(volume, 1.0);
+        backgroundCutoffHz = clamp(backgroundCutoffHz, MIN_CUTOFF_HZ, MAX_CUTOFF_HZ);
+        materialCutoffHz = clamp(materialCutoffHz, MIN_CUTOFF_HZ, MAX_CUTOFF_HZ);
         if (weather == null) weather = new Weather();
         if (weather.rain == null) weather.rain = new Replacement();
-        if (weather.thunder == null) weather.thunder = new Replacement();
+        if (weather.thunder == null) weather.thunder = new Thunder();
+        weather.thunder.maxConcurrent = clamp(weather.thunder.maxConcurrent, 1, Thunder.HARD_LIMIT);
         weather.rain.volume = unit(weather.rain.volume, 1.0);
         weather.thunder.volume = unit(weather.thunder.volume, 1.0);
         if (rain == null) rain = new Rain();

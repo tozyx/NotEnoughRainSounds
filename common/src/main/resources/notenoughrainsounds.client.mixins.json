@@ -9,7 +9,8 @@
     "SoundEngineMixin",
     "AbstractSoundInstanceAccessor",
     "SoundEnginePauseMixin",
-    "ChannelPauseMixin"
+    "ChannelPauseMixin",
+    "ChannelRainFilterMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 
 /** Native timing and position; spatial mono samples, with filtering instead of slowed sheltered rain. */
-final class BackgroundRainSound extends AbstractSoundInstance {
+class BackgroundRainSound extends AbstractSoundInstance {
     private WeighedSoundEvents event;
     private boolean resolved;
     private float resourceVolume = 1;
@@ -23,6 +23,12 @@ final class BackgroundRainSound extends AbstractSoundInstance {
                 ? properties.notenoughrainsounds$getBasePitch() : original.getPitch();
         volume = nativeVolume * (float) multiplier;
         pitch = nativePitch;
+        if (replacement.equals(WeatherSoundPolicy.Event.RAIN.replacement())
+                && original.getLocation().equals(WeatherSoundPolicy.Event.RAIN_ABOVE.original())) {
+            // Reconstruct the dry gain before the dynamic envelope applies the native half-volume.
+            volume *= 2;
+            pitch *= 2;
+        }
         if (replacement.equals(WeatherSoundPolicy.Event.RAIN_ABOVE.replacement())) {
             if (original.getLocation().equals(WeatherSoundPolicy.Event.RAIN_ABOVE.original())) {
                 // Vanilla's half speed suits its own above sample. Our already-filtered recording

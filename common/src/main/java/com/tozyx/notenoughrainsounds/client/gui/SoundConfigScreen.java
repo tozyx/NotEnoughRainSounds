@@ -87,6 +87,9 @@ public final class SoundConfigScreen extends Screen {
         toggle("enabled", draft.enabled, value -> draft.enabled = value);
         percent("volume", draft.volume, value -> draft.volume = value);
         toggle("smooth_pause", draft.smoothPause, value -> draft.smoothPause = value);
+        toggle("rain_lowpass", draft.rainLowPass, value -> draft.rainLowPass = value);
+        cutoff("background_cutoff", draft.backgroundCutoffHz, value -> draft.backgroundCutoffHz = value);
+        cutoff("material_cutoff", draft.materialCutoffHz, value -> draft.materialCutoffHz = value);
         toggle("rain_enabled", draft.rain.enabled, value -> draft.rain.enabled = value);
         percent("rain_volume", draft.rain.volume, value -> draft.rain.volume = value);
         link(text("materials"), () -> navigate(Page.MATERIALS), "materials_help");
@@ -95,7 +98,8 @@ public final class SoundConfigScreen extends Screen {
     private void weather() {
         toggle("replace_rain", draft.weather.rain.enabled, value -> draft.weather.rain.enabled = value);
         percent("ambience_volume", draft.weather.rain.volume, value -> draft.weather.rain.volume = value);
-        resourceStatus("rain_assets", WeatherSoundPolicy.Event.RAIN, WeatherSoundPolicy.Event.RAIN_ABOVE);
+        if (draft.rainLowPass) resourceStatus("rain_assets", WeatherSoundPolicy.Event.RAIN);
+        else resourceStatus("rain_assets", WeatherSoundPolicy.Event.RAIN, WeatherSoundPolicy.Event.RAIN_ABOVE);
         toggle("replace_thunder", draft.weather.thunder.enabled, value -> draft.weather.thunder.enabled = value);
         percent("thunder_volume", draft.weather.thunder.volume, value -> draft.weather.thunder.volume = value);
         resourceStatus("thunder_assets", WeatherSoundPolicy.Event.THUNDER);
@@ -237,6 +241,11 @@ public final class SoundConfigScreen extends Screen {
     private void percent(String key, double initial, DoubleConsumer setter) {
         control(new SettingSlider(text(key), initial, 0.0, 1.0, 0.01, setter,
                 SoundConfigScreen::percentValue), key);
+    }
+
+    private void cutoff(String key, int initial, IntConsumer setter) {
+        control(new SettingSlider(text(key), initial, SoundConfig.MIN_CUTOFF_HZ, SoundConfig.MAX_CUTOFF_HZ,
+                100, value -> setter.accept((int) value), value -> Component.literal((int) value + " Hz")), key);
     }
 
     private void integer(String key, int initial, int min, int max, IntConsumer setter) {

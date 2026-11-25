@@ -3,7 +3,7 @@ package com.tozyx.notenoughrainsounds.client.rain;
 import java.util.Locale;
 
 public enum RainMaterial {
-    STONE, WOOD, METAL, GLASS, CERAMIC, FOLIAGE, GROUND, GRANULAR, AQUATIC_PLANT, WATER, SOFT, VANILLA;
+    STONE, WOOD, BAMBOO, METAL, GLASS, CERAMIC, FOLIAGE, GROUND, GRANULAR, AQUATIC_PLANT, WATER, SOFT, VANILLA;
 
     public String id() {
         return name().toLowerCase(Locale.ROOT);

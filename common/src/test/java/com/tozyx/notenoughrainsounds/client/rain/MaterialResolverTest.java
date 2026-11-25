@@ -41,6 +41,23 @@ class MaterialResolverTest {
         assertFalse(water.plantDrips());
     }
 
+    @Test void bambooSurfacesAndRaftsHaveTheirOwnMaterial() {
+        var config = new SoundConfig();
+        config.rain.materials.get("wood").enabled = false;
+        var resolver = new MaterialResolver(config.rain);
+        for (Block block : List.of(Blocks.BAMBOO, Blocks.BAMBOO_SAPLING, Blocks.BAMBOO_BLOCK,
+                Blocks.STRIPPED_BAMBOO_BLOCK, Blocks.BAMBOO_PLANKS, Blocks.BAMBOO_MOSAIC_STAIRS,
+                Blocks.BAMBOO_SIGN, Blocks.BAMBOO_HANGING_SIGN, Blocks.BAMBOO_TRAPDOOR)) {
+            var match = resolver.resolve(block.defaultBlockState(), false);
+            assertEquals(RainSound.BAMBOO, RainSound.forMaterial(match.material()), block.toString());
+            assertTrue(match.enhanced());
+        }
+        for (var type : net.minecraft.world.entity.vehicle.Boat.Type.values()) {
+            var expected = type == net.minecraft.world.entity.vehicle.Boat.Type.BAMBOO ? RainMaterial.BAMBOO : RainMaterial.WOOD;
+            assertEquals(expected, BoatRainSampler.hullMaterial(type).material());
+        }
+    }
+
     @Test void soilAndGravelSharingVanillaSoundTypeRemainDistinct() {
         MaterialResolver resolver = new MaterialResolver(new SoundConfig().rain);
         assertSame(Blocks.DIRT.defaultBlockState().getSoundType(), Blocks.GRAVEL.defaultBlockState().getSoundType());

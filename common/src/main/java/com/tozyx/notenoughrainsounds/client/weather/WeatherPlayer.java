@@ -69,6 +69,14 @@ public final class WeatherPlayer {
             return;
         }
         rain.removeIf(playing -> tick - playing.started() > 20 && !sounds.isActive(playing.sound()));
+        boolean underRoof = !rain.isEmpty() && SoundOcclusion.hasRoof(level, previousListener);
+        for (Rain playing : rain) {
+            if (playing.sound() instanceof FilteredBackgroundRainSound sound && SoundOcclusion.spatial(sound)
+                    && (tick - playing.started()) % OcclusionGain.CHECK_INTERVAL_TICKS == 0) {
+                sound.rainOcclusion().target(underRoof
+                        && SoundOcclusion.rainBlocked(level, previousListener, sound.sourcePoint()));
+            }
+        }
         // Background starts only in replace(), from a genuine native weather.rain / rain.above request.
     }
 
@@ -76,23 +84,27 @@ public final class WeatherPlayer {
     public boolean replace(Minecraft minecraft, SoundConfig config, SoundInstance original) {
         if (minecraft.level == null || minecraft.player == null || original.getSource() != SoundSource.WEATHER) return false;
         SoundManager sounds = minecraft.getSoundManager();
-        var decision = WeatherSoundPolicy.select(original.getLocation(), config, id -> available(sounds, id));
+        ResourceLocation request = original.getLocation();
+        boolean rainRequest = request.equals(WeatherSoundPolicy.Event.RAIN.original())
+                || request.equals(WeatherSoundPolicy.Event.RAIN_ABOVE.original());
+        Vec3 listener = minecraft.gameRenderer.getMainCamera().getPosition();
+        boolean blockedRain = rainRequest && config.enabled && config.weather.rain.enabled && SoundOcclusion.spatial(original)
+                && SoundOcclusion.hasRoof(minecraft.level, listener)
+                && SoundOcclusion.rainBlocked(minecraft.level, listener,
+                        new Vec3(original.getX(), original.getY(), original.getZ()));
+        var decision = WeatherSoundPolicy.select(request, config, blockedRain, id -> available(sounds, id));
         if (decision.action() == WeatherSoundPolicy.Action.KEEP_ORIGINAL) return false;
         if (decision.action() == WeatherSoundPolicy.Action.MUTE) return true;
         if (!original.canPlaySound()) return true;
-        if (!original.getLocation().equals(WeatherSoundPolicy.Event.THUNDER.original())) {
-            updateWorld(minecraft);
-            // Vanilla's above check only compares heights. Rain outside a wall can still arrive
-            // as weather.rain: use the filtered profile when the actual path is obstructed.
-            ResourceLocation event = decision.event();
-            if (original.getLocation().equals(WeatherSoundPolicy.Event.RAIN.original())
-                    && SoundOcclusion.spatial(original)
-                    && SoundOcclusion.rainBlocked(level, previousListener,
-                            new Vec3(original.getX(), original.getY(), original.getZ()))) {
-                event = WeatherSoundPolicy.Event.RAIN_ABOVE.replacement();
-                if (!available(sounds, event)) return false;
+        updateWorld(minecraft);
+        if (rainRequest) {
+            BackgroundRainSound sound;
+            if (config.rainLowPass && decision.event().equals(WeatherSoundPolicy.Event.RAIN.replacement())) {
+                sound = new FilteredBackgroundRainSound(original, decision.volumeMultiplier(), blockedRain,
+                        config.backgroundCutoffHz);
+            } else {
+                sound = new BackgroundRainSound(original, decision.event(), decision.volumeMultiplier());
             }
-            BackgroundRainSound sound = new BackgroundRainSound(original, event, decision.volumeMultiplier());
             if (sound.resolve(sounds) == null || sound.getSound() == SoundManager.EMPTY_SOUND
                     || sound.getSound() == SoundManager.INTENTIONALLY_EMPTY_SOUND) return false;
             // Guard command/mod-driven floods without stopping older native-triggered recordings.
@@ -101,10 +113,11 @@ public final class WeatherPlayer {
             rain.add(new Rain(sound, ticks));
             return true;
         }
+        // Let long tails finish. A full budget consumes the request without starting a vanilla fallback.
+        if (!config.weather.thunder.hasRoom(thunder.size())) return true;
         // Resolve native range and gain once, at the already-scheduled native playback time.
         if (original.resolve(sounds) == null || original.getSound() == SoundManager.EMPTY_SOUND
                 || original.getSound() == SoundManager.INTENTIONALLY_EMPTY_SOUND) return false;
-        updateWorld(minecraft);
         Vec3 source = new Vec3(original.getX(), original.getY(), original.getZ());
         double distance = original.isRelative() ? 0 : previousListener.distanceToSqr(source);
         ResourceLocation profile = ThunderSound.profile(distance);
@@ -112,10 +125,15 @@ public final class WeatherPlayer {
         boolean blocked = SoundOcclusion.spatial(original)
                 && SoundOcclusion.blockedNearby(level, previousListener, source.add(0, .05, 0));
         ThunderSound sound = new ThunderSound(original, event, decision.volumeMultiplier(), blocked);
-        // Bound extreme command/mod-driven storms without tying thunder to the material-drop budget.
-        if (thunder.size() >= 8) sounds.stop(thunder.removeFirst().sound());
-        sounds.play(sound);
-        thunder.add(new Thunder(sound, ticks));
+        // Reserve before play: a sound-engine callback can synchronously request another thunderclap.
+        Thunder voice = new Thunder(sound, ticks);
+        thunder.add(voice);
+        try {
+            sounds.play(sound);
+        } catch (RuntimeException | Error failure) {
+            thunder.remove(voice);
+            throw failure;
+        }
         return true;
     }
 

@@ -10,6 +10,7 @@ public enum RainSound {
     CERAMIC(RainMaterial.CERAMIC, "ceramic"),
     GROUND(RainMaterial.GROUND, "ground"),
     WOOD(RainMaterial.WOOD, "wood"),
+    BAMBOO(RainMaterial.BAMBOO, "bamboo"),
     METAL(RainMaterial.METAL, "metal"),
     GLASS(RainMaterial.GLASS, "glass"),
     FOLIAGE(RainMaterial.FOLIAGE, "foliage"),
@@ -47,6 +48,7 @@ public enum RainSound {
             case CERAMIC -> CERAMIC;
             case GROUND -> GROUND;
             case WOOD -> WOOD;
+            case BAMBOO -> BAMBOO;
             case METAL -> METAL;
             case GLASS -> GLASS;
             case FOLIAGE -> FOLIAGE;

@@ -1,5 +1,6 @@
 package com.tozyx.notenoughrainsounds.client.weather;
 
+import com.tozyx.notenoughrainsounds.client.rain.RainSound;
 import java.util.HashMap;
 import java.util.Map;
 import net.minecraft.SharedConstants;
@@ -80,6 +81,68 @@ class RainOcclusionTest {
         assertTrue(SoundOcclusion.blockedNearby(scene, LISTENER, impact, pos -> true));
         scene.blocks.put(new BlockPos(0, 66, 0), Blocks.GLASS.defaultBlockState());
         assertTrue(SoundOcclusion.blockedNearby(scene, LISTENER, impact, pos -> true, true));
+    }
+
+    @Test void bambooEmitterDoesNotMuffleItselfButStillMeetsAWall() {
+        var scene = new Scene();
+        BlockPos anchor = new BlockPos(7, 65, 0);
+        var bamboo = Blocks.BAMBOO.defaultBlockState();
+        scene.blocks.put(anchor, bamboo);
+        Vec3 point = Vec3.atLowerCornerOf(anchor).add(bamboo.getShape(scene, anchor).bounds().getCenter());
+        assertFalse(SoundOcclusion.materialBlocked(scene, LISTENER, point, pos -> true, RainSound.BAMBOO));
+        scene.wall();
+        assertTrue(SoundOcclusion.materialBlocked(scene, LISTENER, point, pos -> true, RainSound.BAMBOO));
+    }
+
+    @Test void bambooRainPassesThroughOtherStalksButNotThroughBambooPlanks() {
+        var scene = new Scene();
+        BlockPos stem = new BlockPos(3, 65, 0);
+        var bamboo = Blocks.BAMBOO.defaultBlockState();
+        scene.blocks.put(stem, bamboo);
+        Vec3 center = Vec3.atLowerCornerOf(stem).add(bamboo.getCollisionShape(scene, stem).bounds().getCenter());
+        Vec3 listener = center.add(-3, 0, 0);
+        Vec3 source = center.add(4, 0, 0);
+        assertTrue(SoundOcclusion.materialBlocked(scene, listener, source, pos -> true, RainSound.WOOD));
+        assertFalse(SoundOcclusion.materialBlocked(scene, listener, source, pos -> true, RainSound.BAMBOO));
+
+        scene.blocks.put(stem, Blocks.BAMBOO_PLANKS.defaultBlockState());
+        assertTrue(SoundOcclusion.materialBlocked(scene, listener, source, pos -> true, RainSound.BAMBOO));
+    }
+
+    @Test void nearbySlopeAndVegetationDoNotCountAsARoof() {
+        var scene = new Scene();
+        scene.wall();
+        BlockPos overhead = new BlockPos(0, 67, 0);
+        for (BlockPos sample : new BlockPos[]{overhead, overhead.east(), overhead.north()}) {
+            scene.blocks.put(sample, Blocks.BAMBOO.defaultBlockState());
+            scene.blocks.put(sample.above(), Blocks.OAK_LEAVES.defaultBlockState());
+        }
+        assertTrue(rainBlocked(scene, LISTENER, RAIN));
+        assertFalse(SoundOcclusion.hasRoof(scene, LISTENER, pos -> 70, pos -> true));
+
+        for (BlockPos sample : new BlockPos[]{overhead, overhead.east(), overhead.north()}) {
+            scene.blocks.put(sample.above(2), Blocks.GLASS.defaultBlockState());
+        }
+        assertTrue(SoundOcclusion.hasRoof(scene, LISTENER, pos -> 70, pos -> true));
+    }
+
+    @Test void isolatedAndOneBlockWideCoverDoNotEnableRainOcclusion() {
+        var scene = new Scene();
+        BlockPos overhead = new BlockPos(0, 67, 0);
+        var roof = Blocks.STONE.defaultBlockState();
+        scene.blocks.put(overhead, roof);
+        assertFalse(SoundOcclusion.hasRoof(scene, LISTENER, pos -> 68, pos -> true));
+
+        scene.blocks.put(overhead.east(), roof);
+        scene.blocks.put(overhead.west(), roof);
+        assertFalse(SoundOcclusion.hasRoof(scene, LISTENER, pos -> 68, pos -> true));
+
+        scene.blocks.put(overhead.north(), roof);
+        assertTrue(SoundOcclusion.hasRoof(scene, LISTENER, pos -> 68, pos -> true));
+        assertFalse(SoundOcclusion.hasRoof(scene, LISTENER, pos -> {
+            assertTrue(pos.getZ() >= 0, "Must not read roof height for an unloaded column");
+            return 68;
+        }, pos -> pos.getZ() >= 0));
     }
 
     @Test void distantThunderMeetsLocalCoverEvenIfTheStrikeIsOutsideLoadedChunks() {

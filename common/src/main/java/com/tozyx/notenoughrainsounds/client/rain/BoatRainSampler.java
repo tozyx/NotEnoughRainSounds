@@ -4,6 +4,7 @@ import com.tozyx.notenoughrainsounds.client.config.SoundConfig;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -19,6 +20,16 @@ final class BoatRainSampler {
     private static final int SCAN_INTERVAL_TICKS = 10;
     private static final int MAX_BOATS = 4;
     private static final MaterialResolver.Match WOOD = new MaterialResolver.Match(RainMaterial.WOOD, true, false);
+    private static final MaterialResolver.Match BAMBOO = new MaterialResolver.Match(RainMaterial.BAMBOO, true, false);
+
+    static MaterialResolver.Match hullMaterial(Boat.Type type) {
+        return type == Boat.Type.BAMBOO ? BAMBOO : WOOD;
+    }
+
+    private static boolean audible(Boat boat, Set<RainSound> available) {
+        return available.contains(RainSound.forMaterial(hullMaterial(boat.getVariant()).material()));
+    }
+
     private List<RainSurface> candidates = List.of();
     private Entity previousVehicle;
     private long nextScan;
@@ -29,19 +40,20 @@ final class BoatRainSampler {
         nextScan = 0;
     }
 
-    List<RainSurface> sample(ClientLevel world, Vec3 listener, Entity vehicle, SoundConfig.Rain settings, long tick) {
+    List<RainSurface> sample(ClientLevel world, Vec3 listener, Entity vehicle, SoundConfig.Rain settings, long tick,
+            Set<RainSound> available) {
         if (tick < nextScan && vehicle == previousVehicle) return candidates;
         nextScan = tick + SCAN_INTERVAL_TICKS;
         previousVehicle = vehicle;
         var found = new ArrayList<RainSurface>(MAX_BOATS);
-        if (vehicle instanceof Boat boat) {
+        if (vehicle instanceof Boat boat && audible(boat, available)) {
             RainSurface ridden = inspect(world, listener, boat, true, settings, tick);
             if (ridden != null) found.add(ridden);
         }
         int radius = Math.min(settings.radius, RainSound.ATTENUATION_DISTANCE);
         int height = Math.min(settings.verticalRange, RainSound.ATTENUATION_DISTANCE);
         AABB area = AABB.ofSize(listener, radius * 2, height * 2, radius * 2);
-        world.getEntitiesOfClass(Boat.class, area, boat -> boat != vehicle && boat.isAlive()).stream()
+        world.getEntitiesOfClass(Boat.class, area, boat -> boat != vehicle && boat.isAlive() && audible(boat, available)).stream()
                 .sorted(Comparator.comparingDouble(boat -> boat.distanceToSqr(listener)))
                 .limit(MAX_BOATS - found.size())
                 .map(boat -> inspect(world, listener, boat, false, settings, tick))
@@ -74,6 +86,6 @@ final class BoatRainSampler {
             if (cell.getY() + top >= hull.y) return null;
         }
         if (!world.isRainingAt(cell.atY(Math.max(cell.getY(), roof)))) return null;
-        return new RainSurface(cell, hull, WOOD, tick, boat.getId(), ridden);
+        return new RainSurface(cell, hull, hullMaterial(boat.getVariant()), tick, boat.getId(), ridden);
     }
 }

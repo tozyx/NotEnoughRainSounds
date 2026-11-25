@@ -49,6 +49,15 @@ class MaterialPlaybackTest {
         assertEquals(1, metal.getVolume());
     }
 
+    @Test void bambooKeepsTheFirstTransientAndRespectsShelter() {
+        for (boolean blocked : new boolean[]{false, true}) {
+            var sound = new MaterialRainSound(RainSound.BAMBOO, 1, 1,
+                    net.minecraft.util.RandomSource.create(1), net.minecraft.world.phys.Vec3.ZERO, blocked);
+            assertEquals(blocked ? .35F : 1F, sound.getVolume(), 1e-6);
+            assertFalse(sound.isLooping());
+        }
+    }
+
     @Test void shelterStartsQuietAndFadesInWhenThePathClears() {
         var wood = new MaterialRainSound(RainSound.WOOD, 1, 1,
                 net.minecraft.util.RandomSource.create(1), net.minecraft.world.phys.Vec3.ZERO, true);

@@ -7,6 +7,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,6 +15,7 @@ import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,6 +27,8 @@ import org.joml.Vector3f;
 
 /** Budgeted surface detection; playback reuses this query to reject stale samples. */
 public final class RainSampler {
+    private static final int BAMBOO_SOURCE_MAX_DROP = 2;
+    private static final Vec3 COLUMN_CENTER = new Vec3(.5, 0, .5);
     private final Map<Long, RainSurface> surfaces = new HashMap<>();
     private final BoatRainSampler boats = new BoatRainSampler();
     private ClientLevel level;
@@ -50,13 +54,11 @@ public final class RainSampler {
         if (plan != null) plan.reset();
     }
 
-    public List<RainSurface> surfaces(ClientLevel world, Vec3 listener, Entity vehicle, boolean woodAvailable) {
+    public List<RainSurface> surfaces(ClientLevel world, Vec3 listener, Entity vehicle, Set<RainSound> available) {
         List<RainSurface> candidates = new ArrayList<>(surfaces.values());
-        if (woodAvailable && settings != null && settings.boatImpacts && world.getRainLevel(1.0F) > 0) {
-            SoundConfig.Material wood = settings.materials.get(RainMaterial.WOOD.id());
-            if (wood.enabled && wood.volume > 0) {
-                candidates.addAll(boats.sample(world, listener, vehicle, settings, ticks));
-            }
+        if (settings != null && settings.boatImpacts && world.getRainLevel(1.0F) > 0
+                && (available.contains(RainSound.WOOD) || available.contains(RainSound.BAMBOO))) {
+            candidates.addAll(boats.sample(world, listener, vehicle, settings, ticks, available));
         }
         return candidates;
     }
@@ -133,7 +135,7 @@ public final class RainSampler {
         if (!world.hasChunk(x >> 4, z >> 4)) return null;
         int blocking = world.getHeight(Heightmap.Types.MOTION_BLOCKING, x, z);
         int top = Math.max(blocking, world.getHeight(Heightmap.Types.WORLD_SURFACE, x, z)) - 1;
-        if (top < world.getMinBuildHeight() || top - listener.y > settings.verticalRange + 1) return null;
+        if (top < world.getMinBuildHeight() || top - listener.y > settings.verticalRange + 1 + BAMBOO_SOURCE_MAX_DROP) return null;
         // Outline shapes supplement the heightmap for thin, non-colliding drip plants.
         int bottom = Math.max(world.getMinBuildHeight(), Math.max(blocking - 1, top - 4));
         for (int y = top; y >= bottom; y--) {
@@ -141,26 +143,46 @@ public final class RainSampler {
             BlockState state = world.getBlockState(position);
             if (state.isAir()) continue;
             boolean plant = MaterialResolver.supportsPlantDrips(state) || state.is(Blocks.LILY_PAD);
-            VoxelShape shape = plant ? state.getShape(world, position) : state.getCollisionShape(world, position);
-            double solidHeight = shape.isEmpty() ? Double.NEGATIVE_INFINITY : shape.max(Direction.Axis.Y, 0.5, 0.5);
+            boolean stalk = state.is(Blocks.BAMBOO) || state.is(Blocks.BAMBOO_SAPLING);
+            VoxelShape shape = plant || stalk ? state.getShape(world, position) : state.getCollisionShape(world, position);
+            // Bamboo outlines include a position-dependent offset. Sample the actual stalk tip.
+            Vec3 center = stalk && !shape.isEmpty() ? shape.bounds().getCenter() : COLUMN_CENTER;
+            double solidHeight = shape.isEmpty() ? Double.NEGATIVE_INFINITY : shape.max(Direction.Axis.Y, center.x, center.z);
             FluidState fluid = world.getFluidState(position);
             double fluidHeight = fluid.isEmpty() ? Double.NEGATIVE_INFINITY : fluid.getHeight(world, position);
             if (!Double.isFinite(solidHeight) && !Double.isFinite(fluidHeight)) continue;
             double height = Math.max(solidHeight, fluidHeight);
-            Vec3 impact = new Vec3(x + 0.5, y + height, z + 0.5);
+            Vec3 impact = new Vec3(x + center.x, y + height, z + center.z);
             BlockPos above = BlockPos.containing(impact.x, impact.y + 0.01, impact.z);
-            if (Math.abs(impact.y - listener.y) > settings.verticalRange
-                    || world.getBiome(above).value().getPrecipitationAt(above) != Biome.Precipitation.RAIN) return null;
+            if (world.getBiome(above).value().getPrecipitationAt(above) != Biome.Precipitation.RAIN) return null;
             boolean water = fluid.is(FluidTags.WATER) && fluidHeight > solidHeight;
-            RainSurface surface = new RainSurface(position, impact, resolver.resolve(state, water), tick);
+            var match = resolver.resolve(state, water);
+            // The exposed tip qualifies the stalk for rain. Playback and range use a fixed point on the upper stalk.
+            RainSurface surface = state.is(Blocks.BAMBOO) && match.material() == RainMaterial.BAMBOO && match.enhanced()
+                    ? bambooSurface(world, position, match, tick)
+                    : new RainSurface(position, impact, match, tick);
             return inside(surface, listener) ? surface : null;
         }
         return null;
     }
 
+    static RainSurface bambooSurface(BlockGetter world, BlockPos tip, MaterialResolver.Match match, long tick) {
+        int segmentsBelow = 0;
+        while (segmentsBelow < BAMBOO_SOURCE_MAX_DROP * 2
+                && world.getBlockState(tip.below(segmentsBelow + 1)).is(Blocks.BAMBOO)) {
+            segmentsBelow++;
+        }
+        BlockPos anchor = tip.below(segmentsBelow / 2);
+        VoxelShape shape = world.getBlockState(anchor).getShape(world, anchor);
+        Vec3 center = shape.isEmpty() ? Vec3.atCenterOf(anchor)
+                : Vec3.atLowerCornerOf(anchor).add(shape.bounds().getCenter());
+        return new RainSurface(anchor, center, match, tick);
+    }
+
     private static void showMarker(ClientLevel world, RainSurface surface) {
         Vector3f color = switch (surface.match().material()) {
             case WOOD -> new Vector3f(0.7F, 0.4F, 0.15F);
+            case BAMBOO -> new Vector3f(0.65F, 0.85F, 0.25F);
             case METAL -> new Vector3f(1.0F, 0.75F, 0.1F);
             case GLASS -> new Vector3f(0.4F, 1.0F, 1.0F);
             case FOLIAGE -> new Vector3f(0.2F, 1.0F, 0.2F);

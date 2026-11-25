@@ -23,6 +23,29 @@ class RainPlaybackPlanTest {
     private static RainPlaybackPlan.Group group(RainSound kind) { return new RainPlaybackPlan.Group(0,0,kind); }
     private record Voice(RainSound kind, long start, long end) {}
 
+    @Test void bambooBedOverlapsOnASingleSurfaceAndInAForest() {
+        var config = new SoundConfig();
+        var plan = new RainPlaybackPlan();
+        var random = RandomSource.create(7);
+        var bamboo = List.of(surface(0, 0, RainMaterial.BAMBOO, true, false),
+                surface(10, 0, RainMaterial.BAMBOO, true, false));
+        for (var surfaces : List.of(bamboo.subList(0, 1), bamboo)) {
+            plan.clear();
+            int last = -1;
+            for (int tick = 0; tick < 1200; tick++) {
+                var occupied = last < 0 ? List.<RainPlaybackPlan.Group>of() : List.of(group(RainSound.BAMBOO));
+                var requests = plan.poll(tick, surfaces, config, Set.of(RainSound.BAMBOO), occupied,
+                        occupied.isEmpty() ? 1 : 0, random, LISTENER);
+                if (requests.isEmpty()) continue;
+                assertEquals(1, requests.size());
+                if (last >= 0) assertTrue(tick - last >= 30 && tick - last <= 34);
+                else assertEquals(0, tick);
+                last = tick;
+            }
+            assertTrue(last >= 1200 - 34);
+        }
+    }
+
     @Test void aSingleMetalBlockStartsAgainWhileItsPreviousFullTakeIsStillPlaying() {
         var config = new SoundConfig();
         config.rain.materials.get("metal").triggerProbability=0;

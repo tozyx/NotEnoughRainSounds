@@ -1,5 +1,6 @@
 package com.tozyx.notenoughrainsounds.client.rain;
 
+import com.tozyx.notenoughrainsounds.client.weather.FilteredRainVoice;
 import com.tozyx.notenoughrainsounds.client.weather.OcclusionGain;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
@@ -10,7 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.phys.Vec3;
 
 /** One independent full recording; other voices may overlap it without releasing or replacing it. */
-final class MaterialRainSound extends AbstractTickableSoundInstance {
+final class MaterialRainSound extends AbstractTickableSoundInstance implements FilteredRainVoice {
     static final double SURFACE_OFFSET = .05;
     private final boolean sustained;
     private final OcclusionGain shelter;
@@ -23,7 +24,7 @@ final class MaterialRainSound extends AbstractTickableSoundInstance {
 
     MaterialRainSound(RainSound kind, float gain, float pitch, RandomSource random, Vec3 point, boolean blocked) {
         super(SoundEvent.createVariableRangeEvent(kind.id()), SoundSource.WEATHER, random);
-        this.sustained = kind != RainSound.PLANT_DRIP;
+        this.sustained = kind != RainSound.PLANT_DRIP && kind != RainSound.BAMBOO;
         this.gain = gain;
         this.pitch = pitch;
         moveTo(point);
@@ -52,6 +53,8 @@ final class MaterialRainSound extends AbstractTickableSoundInstance {
     void gain(float gain) {
         this.gain = gain;
     }
+
+    @Override public OcclusionGain rainOcclusion() { return shelter; }
 
     void obstructed(boolean blocked) {
         shelter.target(blocked);

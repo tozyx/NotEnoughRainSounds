@@ -35,7 +35,8 @@ class ConfigStoreTest {
         assertEquals(store.current().rain.materials.get("wood").exclude,
                 reloaded.current().rain.materials.get("wood").exclude);
         assertEquals(12, reloaded.current().rain.radius);
-        assertEquals(11, reloaded.current().rain.materials.size());
+        assertEquals(12, reloaded.current().rain.materials.size());
+        assertTrue(reloaded.current().rain.materials.get("bamboo").enabled);
     }
 
     @Test void editingSnapshotDoesNotMutateLiveSettingsOrFile() throws Exception {

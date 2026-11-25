@@ -23,6 +23,7 @@ class WeatherConfigTest {
         assertTrue(store.current().weather.thunder.enabled);
         assertEquals(1, store.current().weather.rain.volume);
         assertEquals(1, store.current().weather.thunder.volume);
+        assertEquals(10, store.current().weather.thunder.maxConcurrent);
         assertEquals(original, Files.readString(path));
     }
 
@@ -33,6 +34,7 @@ class WeatherConfigTest {
         draft.weather.rain.enabled = false;
         draft.weather.rain.volume = 0.2;
         draft.weather.thunder.volume = 0.6;
+        draft.weather.thunder.maxConcurrent = 3;
         assertTrue(store.current().weather.rain.enabled);
         assertEquals(1, store.current().weather.thunder.volume);
         store.save(draft);
@@ -44,6 +46,25 @@ class WeatherConfigTest {
         assertEquals(0.2, next.current().weather.rain.volume);
         assertTrue(next.current().weather.thunder.enabled);
         assertEquals(0.6, next.current().weather.thunder.volume);
+        assertEquals(3, next.current().weather.thunder.maxConcurrent);
+    }
+
+    @Test void thunderBudgetHonorsLowerLimitsAndNeverExceedsTen() {
+        SoundConfig config = new SoundConfig();
+        for (int requested : new int[] {1, 4, 10, Integer.MAX_VALUE}) {
+            config.weather.thunder.maxConcurrent = requested;
+            assertFalse(config.weather.thunder.hasRoom(10));
+            config.validate();
+            int active = 0;
+            for (int i = 0; i < 1000; i++) {
+                if (config.weather.thunder.hasRoom(active)) active++;
+            }
+            assertEquals(Math.min(requested, 10), active);
+            assertTrue(config.weather.thunder.hasRoom(active - 1));
+        }
+        config.weather.thunder.maxConcurrent = -5;
+        config.validate();
+        assertEquals(1, config.weather.thunder.maxConcurrent);
     }
 
     @Test void nullWeatherSectionsAreRepaired() throws Exception {

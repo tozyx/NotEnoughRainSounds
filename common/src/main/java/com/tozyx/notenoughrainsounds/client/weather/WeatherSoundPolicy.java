@@ -47,11 +47,16 @@ public final class WeatherSoundPolicy {
      * Missing material is a preparation fallback, not a layer mixed with a ready replacement.
      */
     public static Decision select(ResourceLocation original, SoundConfig config,
-                                  Predicate<ResourceLocation> available) {
+                                  boolean blocked, Predicate<ResourceLocation> available) {
         Event event = forOriginal(original);
         if (event == null || !config.enabled) return keep(original);
         SoundConfig.Replacement settings = event.settings(config);
-        if (!settings.enabled || !available.test(event.replacement())) return keep(original);
+        if (!settings.enabled) return keep(original);
+        if (event.rain) {
+            event = !blocked || (config.rainLowPass && available.test(Event.RAIN.replacement()))
+                    ? Event.RAIN : Event.RAIN_ABOVE;
+        }
+        if (!available.test(event.replacement())) return keep(original);
         double volume = config.volume * settings.volume;
         return new Decision(volume > 0 ? Action.REPLACE : Action.MUTE, event.replacement(), volume);
     }

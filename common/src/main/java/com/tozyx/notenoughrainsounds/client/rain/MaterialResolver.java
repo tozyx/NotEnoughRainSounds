@@ -57,6 +57,9 @@ public final class MaterialResolver {
         if (state.getFluidState().is(FluidTags.LAVA) || state.is(Blocks.MAGMA_BLOCK)
                 || CampfireBlock.isLitCampfire(state)) return RainMaterial.VANILLA;
         if (state.is(BlockTags.LEAVES)) return RainMaterial.FOLIAGE;
+        SoundType sound = state.getSoundType();
+        if (is(sound, SoundType.BAMBOO, SoundType.BAMBOO_SAPLING, SoundType.BAMBOO_WOOD, SoundType.BAMBOO_WOOD_HANGING_SIGN)
+                || state.is(Blocks.BAMBOO_SIGN) || state.is(Blocks.BAMBOO_WALL_SIGN)) return RainMaterial.BAMBOO;
         if (state.is(BlockTags.PLANKS) || state.is(BlockTags.LOGS) || state.is(BlockTags.ALL_SIGNS)) return RainMaterial.WOOD;
         if (state.is(BlockTags.WOOL) || state.is(BlockTags.WOOL_CARPETS) || state.is(BlockTags.SNOW)) return RainMaterial.SOFT;
         if (state.is(BlockTags.TERRACOTTA) || state.is(Blocks.TERRACOTTA) || state.getBlock() instanceof GlazedTerracottaBlock
@@ -66,8 +69,7 @@ public final class MaterialResolver {
         if (state.is(BlockTags.DIRT) || state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT)
                 || state.is(Blocks.ROOTED_DIRT) || state.is(Blocks.GRASS_BLOCK) || state.is(Blocks.PODZOL)
                 || state.is(Blocks.DIRT_PATH) || state.is(Blocks.FARMLAND)) return RainMaterial.GROUND;
-        SoundType sound = state.getSoundType();
-        if (is(sound, SoundType.WOOD, SoundType.NETHER_WOOD, SoundType.BAMBOO_WOOD, SoundType.CHERRY_WOOD,
+        if (is(sound, SoundType.WOOD, SoundType.NETHER_WOOD, SoundType.CHERRY_WOOD,
                 SoundType.STEM, SoundType.SCAFFOLDING, SoundType.CHISELED_BOOKSHELF)) return RainMaterial.WOOD;
         if (is(sound, SoundType.METAL, SoundType.ANVIL, SoundType.COPPER, SoundType.COPPER_BULB,
                 SoundType.COPPER_GRATE, SoundType.NETHERITE_BLOCK, SoundType.CHAIN,

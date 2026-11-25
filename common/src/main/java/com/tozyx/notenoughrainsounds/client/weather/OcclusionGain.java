@@ -5,7 +5,9 @@ public final class OcclusionGain {
     public static final int CHECK_INTERVAL_TICKS = 4;
     private final float covered;
     private final float step;
-    private float gain;
+    // The sound executor observes the same smoothed coverage as the client tick's volume.
+    private volatile float gain;
+    private float coveredHighGain = 1;
     private float target;
 
     public OcclusionGain(float covered, boolean blocked) {
@@ -13,6 +15,22 @@ public final class OcclusionGain {
         this.step = (1 - covered) / 4;
         target(blocked);
         gain = target;
+    }
+
+    public void filterAt(int cutoffHz) {
+        coveredHighGain = referenceGain(cutoffHz);
+    }
+
+    // EFX exposes gain at a 5 kHz reference. Solve the unity-slope OpenAL Soft shelf
+    // for a -3 dB point at the requested frequency, using a nominal 48 kHz mixer.
+    static float referenceGain(int cutoffHz) {
+        double ratio = Math.tan(Math.PI * 5000 / 48000) / Math.tan(Math.PI * cutoffHz / 48000);
+        double k = Math.pow(ratio, 4);
+        return (float) Math.sqrt(2 / (k + Math.hypot(k, Math.sqrt(8))));
+    }
+
+    public float highGain() {
+        return 1 - (1 - coveredHighGain) * ((1 - gain) / (1 - covered));
     }
 
     public float current() { return gain; }

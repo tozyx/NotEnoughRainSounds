@@ -86,7 +86,7 @@ class NativeRainReplacementTest {
         var config = new SoundConfig();
         config.volume = .8;
         config.weather.rain.volume = .5;
-        var decision = WeatherSoundPolicy.select(nativeRain.getLocation(), config, id -> true);
+        var decision = WeatherSoundPolicy.select(nativeRain.getLocation(), config, false, id -> true);
         var replacement = new BackgroundRainSound(nativeRain, decision.event(), decision.volumeMultiplier());
         assertEquals(.08F, replacement.getVolume(), 1e-6);
     }
@@ -95,10 +95,26 @@ class NativeRainReplacementTest {
         var replacement = new BackgroundRainSound(original(WeatherSoundPolicy.Event.RAIN, .2F, 1, 0, 64, 0),
                 WeatherSoundPolicy.Event.RAIN.replacement(), 1);
         assertEquals(WeatherSoundPolicy.Action.KEEP_ORIGINAL,
-                WeatherSoundPolicy.select(replacement.getLocation(), new SoundConfig(), id -> {
+                WeatherSoundPolicy.select(replacement.getLocation(), new SoundConfig(), false, id -> {
                     fail("Replacement must not be intercepted recursively");
                     return false;
                 }).action());
+    }
+
+    @Test void sharedRainPreservesNativeShelteredLevelAndOpensUpSmoothly() {
+        var request = original(WeatherSoundPolicy.Event.RAIN_ABOVE, .1F, .5F, 1, 64, 0);
+        var sound = new FilteredBackgroundRainSound(request, 1, true, 2600);
+        assertEquals(WeatherSoundPolicy.Event.RAIN.replacement(), sound.getLocation());
+        assertEquals(.1F, sound.getVolume(), 1e-6);
+        assertEquals(1F, sound.getPitch());
+        float filtered = sound.rainOcclusion().highGain();
+        assertTrue(filtered < OcclusionGain.referenceGain(4000));
+        sound.rainOcclusion().target(false);
+        sound.tick();
+        assertTrue(sound.rainOcclusion().highGain() > filtered && sound.rainOcclusion().highGain() < 1);
+        for (int i = 0; i < 3; i++) sound.tick();
+        assertEquals(1F, sound.rainOcclusion().highGain());
+        assertEquals(.2F, sound.getVolume(), 1e-6);
     }
 
     @Test void modResourcesLeaveSoundRegistrationToExternalPacks() {
