@@ -1,0 +1,139 @@
+{
+  "wood_reference_pack": "NERS-Rain-Material-Wood-C-Boat3-Soft-Tone.zip",
+  "wood_reference_sha256": "65f5b0fd62bca1ea66fd2036ed9ee4f055ed4d324cd480ec0f1d6edc35d91a2a",
+  "wood_measured_clip_lufs": [
+    -38.18447219193674,
+    -38.32868546032489,
+    -38.32435368960945
+  ],
+  "wood_loudness_baseline_lufs": -38.32435368960945,
+  "reference_target_lufs": -36.32435368960945,
+  "reference_boost_db": 2.0,
+  "max_rain_bed_reduction_db": 4.0,
+  "metal5_source": "soundResource/ai-generated-and-freesound/selected/[ai]rain_metal5.wav",
+  "metal5_source_sha256": "9832eee6b821be167e8b6e67db15b821833913c5d9d3412a359b9e05d4ddc6e7",
+  "duration_seconds": 4.4,
+  "sample_rate": 48000,
+  "channels": 1,
+  "whole_mix_edge_fades_seconds": [
+    1.2,
+    1.2
+  ],
+  "reference_edge_fades_seconds": [
+    0.045,
+    0.09
+  ],
+  "processing": "Match reference loudness to Wood C after placement and edge fades, then add 2 dB. Set Metal5 to the previous Wood C minus 6 LU baseline before applying up to 4 dB of attenuation to the steady rain. A smoothed gain curve bypasses detected impacts. Sum the layers and retain the mix level through encoding.",
+  "clips": [
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/metal/metal_01.ogg",
+      "sha256": "50ce8372a4ef06bf86eb91f08bf4b196c6485ee1fefa93ea6f5b0f77cb65f233",
+      "metal5_window_seconds": [
+        0.04,
+        4.44
+      ],
+      "reference_source": "soundResource/the-sound-of-rain/rain_sounds_metal_1.ogg",
+      "reference_sha256": "0136b63e68468b20aa68bf24fd4d07ebae1dc2d5a67740843678ca68f19a1320",
+      "reference_window_seconds": [
+        0.0,
+        3.0806349206349206
+      ],
+      "reference_offset_seconds": 0.62,
+      "reference_before_mix_lufs": -36.32435368960945,
+      "metal5_before_mix_lufs": -45.2965154536293,
+      "quiet_frame_median_gain_db": -3.999999999999997,
+      "detected_strong_frame_minimum_gain_db": -0.08742440394426457,
+      "encoding_gain_db": 0.5136313104650658,
+      "decoded_mix_lufs": -35.99278925534992,
+      "decoded_sample_peak_dbfs": -11.617962546406488
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/metal/metal_02.ogg",
+      "sha256": "24957889a3afd0bb54390d56cd295e7f0ffca9df45b20bfa554cdcb39f9be0f4",
+      "metal5_window_seconds": [
+        10.25,
+        14.65
+      ],
+      "reference_source": "soundResource/the-sound-of-rain/rain_sounds_metal_3.ogg",
+      "reference_sha256": "2ec1c41df45942605b2bcfff86f0438aa5b7bf0715c8e4631a9de911fdd83986",
+      "reference_window_seconds": [
+        0.0,
+        3.0211111111111113
+      ],
+      "reference_offset_seconds": 0.67,
+      "reference_before_mix_lufs": -36.32435368960945,
+      "metal5_before_mix_lufs": -47.12868904214905,
+      "quiet_frame_median_gain_db": -3.999999999999997,
+      "detected_strong_frame_minimum_gain_db": -0.08195620788493135,
+      "encoding_gain_db": 0.36603696126339785,
+      "decoded_mix_lufs": -36.408485428895375,
+      "decoded_sample_peak_dbfs": -13.4655968098458
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/metal/metal_03.ogg",
+      "sha256": "2770342567d3965b1965b0531e759a825f8283edb46793f7b73b4ef7a301656e",
+      "metal5_window_seconds": [
+        20.12,
+        24.52
+      ],
+      "reference_source": "soundResource/the-sound-of-rain/rain_sounds_metal_6.ogg",
+      "reference_sha256": "b9cca619f0d2801ccb86ce8ff2516592967fb39dd1a36fb2000e897a467eaa8d",
+      "reference_window_seconds": [
+        4.7,
+        9.1
+      ],
+      "reference_offset_seconds": 0.0,
+      "reference_before_mix_lufs": -36.32435368960945,
+      "metal5_before_mix_lufs": -46.46008683299111,
+      "quiet_frame_median_gain_db": -3.999999999999997,
+      "detected_strong_frame_minimum_gain_db": -0.10330274432297283,
+      "encoding_gain_db": 0.3355949101413528,
+      "decoded_mix_lufs": -36.00282327481092,
+      "decoded_sample_peak_dbfs": -13.375531811993833
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/metal/metal_04.ogg",
+      "sha256": "7372562ae7e83f23f09db4726f66ebb30d802d219e15d53d11d5c428e95a37a1",
+      "metal5_window_seconds": [
+        0.12,
+        4.52
+      ],
+      "reference_source": "soundResource/the-sound-of-rain/rain_sounds_metal_4.ogg",
+      "reference_sha256": "96d34f66bc38a115250d378df66b32c420d3c7314f0cfebfcec3a1efc8a2a102",
+      "reference_window_seconds": [
+        0.0,
+        3.482471655328798
+      ],
+      "reference_offset_seconds": 0.42,
+      "reference_before_mix_lufs": -36.32435368960945,
+      "metal5_before_mix_lufs": -45.334338097138414,
+      "quiet_frame_median_gain_db": -3.999999999999997,
+      "detected_strong_frame_minimum_gain_db": -0.08742440394426457,
+      "encoding_gain_db": 0.36328091895228387,
+      "decoded_mix_lufs": -35.9568021298908,
+      "decoded_sample_peak_dbfs": -15.112855627731541
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/metal/metal_05.ogg",
+      "sha256": "a3304e47e096b249085d42a40004f5f683942f0dd09d6b0a7dd9784c4d04fdba",
+      "metal5_window_seconds": [
+        5.9,
+        10.3
+      ],
+      "reference_source": "soundResource/the-sound-of-rain/rain_sounds_metal_10.ogg",
+      "reference_sha256": "1ddce2aa5dbee3ba268b7fc4f18bf24e26061e8f10d047591d6f2f5d59f67200",
+      "reference_window_seconds": [
+        4.64,
+        9.04
+      ],
+      "reference_offset_seconds": 0.0,
+      "reference_before_mix_lufs": -36.32435368960945,
+      "metal5_before_mix_lufs": -47.16497566392334,
+      "quiet_frame_median_gain_db": -3.999999999999997,
+      "detected_strong_frame_minimum_gain_db": -0.08890981148936616,
+      "encoding_gain_db": 0.35065162326922195,
+      "decoded_mix_lufs": -35.99159606064478,
+      "decoded_sample_peak_dbfs": -10.451723714273484
+    }
+  ]
+}

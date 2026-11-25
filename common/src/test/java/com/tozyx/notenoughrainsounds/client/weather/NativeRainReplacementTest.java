@@ -117,9 +117,30 @@ class NativeRainReplacementTest {
         assertEquals(.2F, sound.getVolume(), 1e-6);
     }
 
-    @Test void modResourcesLeaveSoundRegistrationToExternalPacks() {
-        assertNull(getClass().getResource("/assets/notenoughrainsounds/sounds.json"),
-                "Custom sound events must come from an enabled resource pack");
+    @Test void bundledSoundRegistryResolvesItsAssetsAndEventReferences() throws Exception {
+        String assets = "/assets/notenoughrainsounds/";
+        try (var input = getClass().getResourceAsStream(assets + "sounds.json")) {
+            assertNotNull(input, "Pack installation must include the default sound registry");
+            var events = JsonParser.parseReader(new InputStreamReader(input, StandardCharsets.UTF_8)).getAsJsonObject();
+            for (var required : new String[]{"weather.rain", "weather.rain.above", "weather.thunder", "rain.bamboo"}) {
+                assertTrue(events.has(required), required);
+            }
+            for (var event : events.entrySet()) {
+                var sounds = event.getValue().getAsJsonObject().getAsJsonArray("sounds");
+                assertFalse(sounds.isEmpty(), event.getKey());
+                for (var entry : sounds) {
+                    var definition = entry.isJsonObject() ? entry.getAsJsonObject() : null;
+                    var id = definition == null ? entry.getAsString() : definition.get("name").getAsString();
+                    assertTrue(id.startsWith("notenoughrainsounds:"), id);
+                    String path = id.substring(id.indexOf(':') + 1);
+                    if (definition != null && definition.has("type") && definition.get("type").getAsString().equals("event")) {
+                        assertTrue(events.has(path), event.getKey() + " references " + id);
+                    } else {
+                        assertNotNull(getClass().getResource(assets + "sounds/" + path + ".ogg"), id);
+                    }
+                }
+            }
+        }
     }
 
     @Test void wallObstructedNormalRainUsesShelteredGainWithoutSlowingOrMoving() {

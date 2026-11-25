@@ -1,0 +1,127 @@
+{
+  "glass4_source": "soundResource/ai-generated-and-freesound/selected/[ai]rain_glass4.wav",
+  "glass4_source_sha256": "d80cb9d15524be1c250ad9b6612f4ea7200b4cad1031f6680835fe8125d8a5bb",
+  "reference_source_directory": "soundofrain/src/main/resources/assets/soundofrain/sounds",
+  "reference_archive": "soundResource/the-sound-of-rain",
+  "wood_pack": "NERS-Rain-Material-Wood-C-Boat3-Soft-Tone.zip",
+  "glass4_audition_lufs": -37.32435368960945,
+  "reference_target_lufs": -41.32435368960945,
+  "reference_wood_offset_lu": -3.0,
+  "sample_rate": 48000,
+  "channels": 1,
+  "duration_seconds": 4.4,
+  "edge_fades_seconds": [
+    1.2,
+    1.2
+  ],
+  "glass4_bed_reduction_db": 5.0,
+  "reference_bed_reduction_db": 14.0,
+  "reference_accent_fade_seconds": 0.14,
+  "processing": "Each take overlays a contiguous Glass4 extract with one contiguous reference extract. Reduce each steady rain bed with smoothed transient protection and apply matched sine/cosine fades. Keep the original audition gain on Glass4 and calibrate the reference layer to 3 LU below Wood C before selecting a short fade-edged accent. Leave selected accents at their existing level and timing. Preserve the base, avoid loudness normalization after reducing the reference layer.",
+  "clips": [
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/glass/glass_01.ogg",
+      "sha256": "5ac625b598641f28cd3a5b480fd2a10a1c884335f6511921246faa409941faa2",
+      "glass4_window_seconds": [
+        0.2,
+        4.6
+      ],
+      "reference_source": "rain_sounds_glass_1.ogg",
+      "reference_sha256": "1bd4a2ada1dd566b7a7ac6c11b2de5799f577e47a835162ce106951c0bce8cfe",
+      "reference_window_seconds": [
+        1.1,
+        5.5
+      ],
+      "quiet_frame_change_from_audition_db": -2.4999999999999982,
+      "strong_frame_worst_change_from_audition_db": -0.06784677032139619,
+      "glass4_layer_lufs": -38.95779279653292,
+      "reference_layer_lufs": -37.43853477784231,
+      "reference_accent_interval_in_mix_seconds": [
+        0.82,
+        1.78
+      ],
+      "reference_energy_change_db": -2.7162835910985086,
+      "encoding_correction_db": 0.3156919795641854,
+      "decoded_lufs": -37.833169074888765,
+      "decoded_sample_peak_dbfs": -15.334190158032321
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/glass/glass_02.ogg",
+      "sha256": "030a7be1d1ddc2668c71aa1c240831abdd7db09f4cc228ae3a07baa230a3e77e",
+      "glass4_window_seconds": [
+        8.9,
+        13.3
+      ],
+      "reference_source": "rain_sounds_glass_3.ogg",
+      "reference_sha256": "a2bfb329aa515b074a51a7e4c7e6ded7de9e8e09c76feb7364214076b44208e5",
+      "reference_window_seconds": [
+        0.85,
+        5.25
+      ],
+      "quiet_frame_change_from_audition_db": -2.468876134479115,
+      "strong_frame_worst_change_from_audition_db": -0.06464195901989565,
+      "glass4_layer_lufs": -38.6836102214762,
+      "reference_layer_lufs": -37.975302549835675,
+      "reference_accent_interval_in_mix_seconds": [
+        0.87,
+        1.7
+      ],
+      "reference_energy_change_db": -3.1740211943244496,
+      "encoding_correction_db": 0.32594167534463825,
+      "decoded_lufs": -37.68735872180479,
+      "decoded_sample_peak_dbfs": -14.417382883349257
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/glass/glass_03.ogg",
+      "sha256": "00d1ea84c59871324a8eafd01d6c36707e0b57dfa633a71d67e99f9305347ca6",
+      "glass4_window_seconds": [
+        15.55,
+        19.95
+      ],
+      "reference_source": "rain_sounds_glass_4.ogg",
+      "reference_sha256": "e455495d478b726f8281cb906416ac514e9cec4fadd43b8bb34e7222b52e0dc6",
+      "reference_window_seconds": [
+        1.45,
+        5.85
+      ],
+      "quiet_frame_change_from_audition_db": -2.4999999999999982,
+      "strong_frame_worst_change_from_audition_db": -0.054875762560620676,
+      "glass4_layer_lufs": -38.81713976386811,
+      "reference_layer_lufs": -40.57146132025708,
+      "reference_accent_interval_in_mix_seconds": [
+        1.3,
+        2.68
+      ],
+      "reference_energy_change_db": -3.404743512460903,
+      "encoding_correction_db": 0.2823720961441515,
+      "decoded_lufs": -37.83616391465421,
+      "decoded_sample_peak_dbfs": -16.697382824311212
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/glass/glass_04.ogg",
+      "sha256": "6162a3f6baa3122f428642d8c35257a78b426696b31d11ea593eee46e2ca73c2",
+      "glass4_window_seconds": [
+        0.2,
+        4.6
+      ],
+      "reference_source": "rain_sounds_glass_5.ogg",
+      "reference_sha256": "ced0470292b0ae956307916c442902f2db621628fb81d2469356770c049129c1",
+      "reference_window_seconds": [
+        2.35,
+        6.75
+      ],
+      "quiet_frame_change_from_audition_db": -2.4999999999999982,
+      "strong_frame_worst_change_from_audition_db": -0.06784677032139619,
+      "glass4_layer_lufs": -38.95779279653292,
+      "reference_layer_lufs": -43.02759610270426,
+      "reference_accent_interval_in_mix_seconds": [
+        2.73,
+        3.39
+      ],
+      "reference_energy_change_db": -8.404451144006778,
+      "encoding_correction_db": 0.3078960046608182,
+      "decoded_lufs": -38.62306539602582,
+      "decoded_sample_peak_dbfs": -19.179318540863065
+    }
+  ]
+}

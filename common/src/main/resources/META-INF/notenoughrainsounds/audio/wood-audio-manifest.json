@@ -1,0 +1,134 @@
+{
+  "source_type": "User-supplied AI-generated candidates",
+  "legacy_wood_median_lufs": -35.31,
+  "fade_in_seconds": 0.012,
+  "fade_out_seconds": 0.04,
+  "processing": "Stereo averaged to spatial mono. Independent cuts, fixed gain, no compression or loop.",
+  "clips": [
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/wood/wood_01.ogg",
+      "source": "[ai]rain_wood_boat3.wav",
+      "source_sha256": "b8ff139d4f97e6f2816d81b448822c1a35ad5b16431228160c60f7a6d8d5d535",
+      "start_seconds": 2.9,
+      "end_seconds": 7.3,
+      "source_lufs": -43.53,
+      "applied_gain_db": 10.46,
+      "output_lufs": -38.18,
+      "true_peak_dbtp": -12.54,
+      "sha256": "c7c7dc9410efe0fdc91eb855a77b081905b7a6dd275146a4a6257a06b6d2cae9",
+      "previous_output_lufs": -36.82,
+      "previous_true_peak_dbtp": -12.36,
+      "rain_bed_reduction": {
+        "quiet_frame_median_gain_db": -3.784,
+        "strong_hit_frame_median_gain_db": -0.0,
+        "maximum_bed_reduction_db": 4.0
+      },
+      "softer_rain_output_lufs": -34.44,
+      "strike_spacing": {
+        "kept_knock_offsets_seconds": [
+          0.792,
+          2.488,
+          3.672
+        ],
+        "softened_knock_offsets_seconds": [
+          0.308,
+          1.347,
+          1.547,
+          1.632,
+          1.988,
+          2.748,
+          2.908,
+          3.353
+        ],
+        "median_reduction_db_at_softened_knocks": 16.0
+      }
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/wood/wood_02.ogg",
+      "source": "[ai]rain_wood_boat3.wav",
+      "source_sha256": "b8ff139d4f97e6f2816d81b448822c1a35ad5b16431228160c60f7a6d8d5d535",
+      "start_seconds": 10.4,
+      "end_seconds": 14.8,
+      "source_lufs": -44.83,
+      "applied_gain_db": 11.75,
+      "output_lufs": -38.15,
+      "true_peak_dbtp": -10.87,
+      "sha256": "cf60f58440085c4d412f243111b9d3d59b96de49156393e62f5a6250755a4ece",
+      "previous_output_lufs": -36.81,
+      "previous_true_peak_dbtp": -10.74,
+      "rain_bed_reduction": {
+        "quiet_frame_median_gain_db": -3.737,
+        "strong_hit_frame_median_gain_db": -0.0,
+        "maximum_bed_reduction_db": 4.0
+      },
+      "softer_rain_output_lufs": -34.43,
+      "strike_spacing": {
+        "kept_knock_offsets_seconds": [
+          1.223,
+          3.133
+        ],
+        "softened_knock_offsets_seconds": [
+          0.143,
+          1.027,
+          1.348,
+          1.572,
+          2.412,
+          2.572,
+          2.972,
+          3.342,
+          3.977
+        ],
+        "median_reduction_db_at_softened_knocks": 16.0
+      }
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/wood/wood_03.ogg",
+      "source": "[ai]rain_wood_boat3.wav",
+      "source_sha256": "b8ff139d4f97e6f2816d81b448822c1a35ad5b16431228160c60f7a6d8d5d535",
+      "start_seconds": 20.4,
+      "end_seconds": 24.8,
+      "source_lufs": -45.2,
+      "applied_gain_db": 12.11,
+      "output_lufs": -38.25,
+      "true_peak_dbtp": -9.21,
+      "sha256": "20d1c8b82ce09eb8e8c0425f23cc38cd6beb5ab668f720a700e7d59d6ab936e8",
+      "previous_output_lufs": -37.18,
+      "previous_true_peak_dbtp": -9.18,
+      "rain_bed_reduction": {
+        "quiet_frame_median_gain_db": -3.303,
+        "strong_hit_frame_median_gain_db": -0.0,
+        "maximum_bed_reduction_db": 4.0
+      },
+      "softer_rain_output_lufs": -34.16,
+      "strike_spacing": {
+        "kept_knock_offsets_seconds": [
+          0.658,
+          3.008
+        ],
+        "softened_knock_offsets_seconds": [
+          0.328,
+          0.773,
+          1.448,
+          1.788,
+          2.208,
+          2.553,
+          3.098,
+          3.578,
+          3.713,
+          4.023,
+          4.138,
+          4.268
+        ],
+        "median_reduction_db_at_softened_knocks": 16.0
+      }
+    }
+  ],
+  "rain_bed_reduction": "Up to 4 dB of attenuation between detectable transients. Mid-band and full-band detection protect knock onsets and short tails. No upward loudness normalization.",
+  "original_target_lufs": -33.31,
+  "strike_spacing": "Uses the same three cuts as Softer Rain. Each retains spaced transients. Other detected peaks are locally softened with short ramps.",
+  "soft_tone": {
+    "additional_bed_gain_db": -1.8,
+    "treble_gain_db": -2.2,
+    "crossover_hz": 1700
+  }
+}

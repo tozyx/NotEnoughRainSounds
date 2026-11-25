@@ -1,0 +1,91 @@
+{
+  "source": "soundResource/ai-generated-and-freesound/selected/[ai]rain_granular2.wav",
+  "source_sha256": "50b8ccff1a0dac8e73ac547f142554e21884baee46fd178a7c24aebd2a7fc994",
+  "sample_rate": 48000,
+  "channels": 1,
+  "wood_reference": "NERS-Rain-Material-Wood-C-Boat3-Soft-Tone.zip",
+  "wood_reference_sha256": "65f5b0fd62bca1ea66fd2036ed9ee4f055ed4d324cd480ec0f1d6edc35d91a2a",
+  "wood_offset_lu": 1.0,
+  "output_target_lufs": -37.32435368960945,
+  "processing": "Straight stereo average to mono. Six nonoverlapping contiguous cuts. Smooth local rain bed attenuation with transient protection, sine/cosine edge fades, then constant gain to the common target. No reference recording overlay.",
+  "max_rain_bed_reduction_db": 2.5,
+  "edge_fades_seconds": [
+    1.2,
+    1.2
+  ],
+  "audition": "Enable one granular audition pack at a time.",
+  "clips": [
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/granular/granular_01.ogg",
+      "sha256": "5e0f9fc70813706488b0865a792c39edf7b1a23152208c0176d684412f2b1923",
+      "window_seconds": [
+        1,
+        5.4
+      ],
+      "quiet_frame_median_gain_db": -2.4999999999999982,
+      "encoding_correction_db": 0.42540992360103713,
+      "decoded_lufs": -37.384254103288875,
+      "decoded_sample_peak_dbfs": -6.674442585866375,
+      "duration_seconds": 4.4
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/granular/granular_02.ogg",
+      "sha256": "6abd2b77019253f05182ab175a2e98c46b1c71a77adbe7e01334e1e06161164d",
+      "window_seconds": [
+        12,
+        16.4
+      ],
+      "quiet_frame_median_gain_db": -2.4999999999999982,
+      "encoding_correction_db": 0.35132733540565725,
+      "decoded_lufs": -37.32404328822876,
+      "decoded_sample_peak_dbfs": -12.494960198030086,
+      "duration_seconds": 4.4
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/granular/granular_03.ogg",
+      "sha256": "7327fb17d76eeb50b525c9c605fd91f3b2a42a94b97900f8774489c606ad4dc2",
+      "window_seconds": [
+        20,
+        24.4
+      ],
+      "quiet_frame_median_gain_db": -2.4999999999999982,
+      "encoding_correction_db": 0.4125136957884909,
+      "decoded_lufs": -37.325512975120986,
+      "decoded_sample_peak_dbfs": -10.264393817652664,
+      "duration_seconds": 4.4
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/granular/granular_04.ogg",
+      "sha256": "784b64c4a213253b39123daaafc551da25949c60d19f6457bdd3d195efdf1298",
+      "window_seconds": [
+        5.42,
+        8.64
+      ],
+      "decoded_lufs": -37.34680830370734,
+      "decoded_sample_peak_dbfs": -8.212096137536046,
+      "duration_seconds": 3.22
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/granular/granular_05.ogg",
+      "sha256": "4c141637a33dd01016c602132e659bb1e5cced58f04d977d03c4e5a5eefb6045",
+      "window_seconds": [
+        8.68,
+        11.96
+      ],
+      "decoded_lufs": -37.315199336369496,
+      "decoded_sample_peak_dbfs": -11.964587990102624,
+      "duration_seconds": 3.28
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/granular/granular_06.ogg",
+      "sha256": "48a095382c42aeff7195c172e6bd1a219eecc8e308009f992c88eade6ed1969d",
+      "window_seconds": [
+        16.44,
+        19.97
+      ],
+      "decoded_lufs": -37.313315621629094,
+      "decoded_sample_peak_dbfs": -8.628484086694435,
+      "duration_seconds": 3.53
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "source": "rain_eave.mp3",
+  "source_sha256": "ffbf90a220da631480798fcd20270ffc584e062275b84e769fcd4fc5cf611c80",
+  "max_bed_reduction_db": 9,
+  "clips": [
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/aquatic_plant/aquatic_plant_01.ogg",
+      "start_seconds": 0.15,
+      "duration_seconds": 3.2,
+      "decoded_lufs": -47.459441759191186,
+      "accent_seconds": [
+        0.73,
+        2.48
+      ]
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/aquatic_plant/aquatic_plant_02.ogg",
+      "start_seconds": 3.45,
+      "duration_seconds": 3.2,
+      "decoded_lufs": -47.35347311366022,
+      "accent_seconds": [
+        0.39,
+        1.8
+      ]
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/aquatic_plant/aquatic_plant_03.ogg",
+      "start_seconds": 6.65,
+      "duration_seconds": 3.2,
+      "decoded_lufs": -46.598818019742836,
+      "accent_seconds": [
+        0.45,
+        2.12
+      ]
+    }
+  ],
+  "high_shelf_db": -5,
+  "crossover_hz": 2900,
+  "event": "rain.aquatic_plant",
+  "accent_boost_db": 1.5
+}

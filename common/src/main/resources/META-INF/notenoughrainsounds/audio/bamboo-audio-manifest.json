@@ -1,0 +1,96 @@
+{
+  "sample_rate": 48000,
+  "channels": 1,
+  "variants": [
+    {
+      "name": "rain/bamboo/bamboo_01",
+      "length_s": 2.85,
+      "hit": null,
+      "decoded_peak_dbfs": null
+    },
+    {
+      "name": "rain/bamboo/bamboo_02",
+      "length_s": 3.0,
+      "hit": {
+        "source": "[ai]rain_bamboo_note5.wav",
+        "offset_s": 0.972,
+        "gain_db": -2.18,
+        "tail_start_ms": 40,
+        "tail_time_constant_ms": 24,
+        "end_ms": 145
+      },
+      "decoded_peak_dbfs": -21.43
+    },
+    {
+      "name": "rain/bamboo/bamboo_03",
+      "length_s": 2.72,
+      "hit": {
+        "source": "[ai]rain_bamboo_note5.wav",
+        "offset_s": 1.653,
+        "gain_db": -3.26,
+        "tail_start_ms": 40,
+        "tail_time_constant_ms": 24,
+        "end_ms": 145
+      },
+      "decoded_peak_dbfs": -22.66
+    },
+    {
+      "name": "rain/bamboo/bamboo_04",
+      "length_s": 3.12,
+      "hit": null,
+      "decoded_peak_dbfs": null
+    },
+    {
+      "name": "rain/bamboo/bamboo_05",
+      "length_s": 2.92,
+      "hit": {
+        "source": "[ai]rain_bamboo_note4.wav",
+        "offset_s": 0.938,
+        "gain_db": -5.96,
+        "tail_start_ms": 40,
+        "tail_time_constant_ms": 24,
+        "end_ms": 145
+      },
+      "decoded_peak_dbfs": -25.81
+    },
+    {
+      "name": "rain/bamboo/bamboo_06",
+      "length_s": 3.08,
+      "hit": {
+        "source": "[ai]rain_bamboo_note4.wav",
+        "offset_s": 2.229,
+        "gain_db": -4.3,
+        "tail_start_ms": 40,
+        "tail_time_constant_ms": 24,
+        "end_ms": 145
+      },
+      "decoded_peak_dbfs": -23.87
+    },
+    {
+      "name": "rain/bamboo/bamboo_07",
+      "length_s": 2.65,
+      "hit": {
+        "source": "[ai]rain_bamboo_note3.wav",
+        "offset_s": 1.257,
+        "gain_db": -3.95,
+        "tail_start_ms": 40,
+        "tail_time_constant_ms": 24,
+        "end_ms": 145
+      },
+      "decoded_peak_dbfs": -24.92
+    },
+    {
+      "name": "rain/bamboo/bamboo_08",
+      "length_s": 3.2,
+      "hit": {
+        "source": "[ai]rain_bamboo_note3.wav",
+        "offset_s": 1.063,
+        "gain_db": -4.87,
+        "tail_start_ms": 40,
+        "tail_time_constant_ms": 24,
+        "end_ms": 145
+      },
+      "decoded_peak_dbfs": -25.78
+    }
+  ]
+}

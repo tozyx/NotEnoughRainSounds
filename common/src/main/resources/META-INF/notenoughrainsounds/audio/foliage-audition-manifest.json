@@ -1,0 +1,56 @@
+{
+  "source": "soundResource/ai-generated-and-freesound/selected/[ai]rain_foliage3.wav",
+  "source_sha256": "a2d2215274a6d83f404113c8613baf3691f17cb0a0bd035f679fd776afbc07d4",
+  "sample_rate": 48000,
+  "channels": 1,
+  "duration_seconds": 4.4,
+  "wood_reference": "NERS-Rain-Material-Wood-C-Boat3-Soft-Tone.zip",
+  "wood_reference_sha256": "65f5b0fd62bca1ea66fd2036ed9ee4f055ed4d324cd480ec0f1d6edc35d91a2a",
+  "wood_offset_lu": 1.0,
+  "output_target_lufs": -37.32435368960945,
+  "processing": "Straight stereo average to mono. Three independent contiguous cuts. Smooth local rain bed attenuation with transient protection, sine/cosine edge fades, then constant gain to the common target. No reference recording overlay.",
+  "max_rain_bed_reduction_db": 2.5,
+  "edge_fades_seconds": [
+    1.2,
+    1.2
+  ],
+  "audition": "Enable one foliage audition pack at a time.",
+  "clips": [
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/foliage/foliage_01.ogg",
+      "sha256": "d8c4284348fbd202758f114cbf6418b6664dc62634644618193cea70a1c02f2c",
+      "window_seconds": [
+        2.1,
+        6.5
+      ],
+      "quiet_frame_median_gain_db": -2.4999999999999982,
+      "encoding_correction_db": 0.33586955704812094,
+      "decoded_lufs": -37.329456903942095,
+      "decoded_sample_peak_dbfs": -21.422640576379763
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/foliage/foliage_02.ogg",
+      "sha256": "68ed5254604b7f2578f861b6c8c3f74b63a268d5672a22bef62c2ab53a4e2ec3",
+      "window_seconds": [
+        12.2,
+        16.6
+      ],
+      "quiet_frame_median_gain_db": -2.4999999999999982,
+      "encoding_correction_db": 0.3402697915372387,
+      "decoded_lufs": -37.32464421048679,
+      "decoded_sample_peak_dbfs": -18.45721294291718
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/foliage/foliage_03.ogg",
+      "sha256": "88fe4fcfb02b0eb8eb62a7aab818b8f16cdfedc2add0e2d2858431fb231b8daf",
+      "window_seconds": [
+        22.4,
+        26.8
+      ],
+      "quiet_frame_median_gain_db": -2.4999999999999982,
+      "encoding_correction_db": 0.34985432965314706,
+      "decoded_lufs": -37.31515150452544,
+      "decoded_sample_peak_dbfs": -20.156850899239398
+    }
+  ]
+}

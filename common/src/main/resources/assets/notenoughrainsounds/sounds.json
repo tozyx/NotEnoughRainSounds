@@ -1,0 +1,840 @@
+{
+  "rain.wood": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.wood",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/wood/wood_01",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/wood/wood_02",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/wood/wood_03",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      }
+    ]
+  },
+  "rain.metal": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.metal",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/metal/metal_01",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/metal/metal_02",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/metal/metal_03",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/metal/metal_04",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/metal/metal_05",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      }
+    ]
+  },
+  "rain.aquatic_plant": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.aquatic_plant",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/aquatic_plant/aquatic_plant_01",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/aquatic_plant/aquatic_plant_02",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/aquatic_plant/aquatic_plant_03",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      }
+    ]
+  },
+  "rain.granular": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.granular",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/granular/granular_01",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/granular/granular_02",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/granular/granular_03",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/granular/granular_04",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/granular/granular_05",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/granular/granular_06",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      }
+    ]
+  },
+  "rain.glass": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.glass",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/glass/glass_01",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/glass/glass_02",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/glass/glass_03",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/glass/glass_04",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      }
+    ]
+  },
+  "rain.soft": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.soft",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_01",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_02",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_03",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_04",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_05",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_06",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_07",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_08",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/soft/soft_09",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      }
+    ]
+  },
+  "rain.water": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.water",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/water/water_01",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/water/water_02",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/water/water_03",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      }
+    ]
+  },
+  "weather.thunder.close": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.weather.thunder",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/close_2",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/close_3",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/close_4",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/close_5",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/close_7",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/close_8",
+        "weight": 1
+      }
+    ]
+  },
+  "weather.thunder.medium": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.weather.thunder",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/medium_1",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/medium_2",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/medium_3",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/medium_4",
+        "weight": 1
+      }
+    ]
+  },
+  "weather.thunder.far": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.weather.thunder",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/far_1",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/far_2",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/far_3",
+        "weight": 1
+      },
+      {
+        "name": "notenoughrainsounds:weather/thunder_audition/far_4",
+        "weight": 1
+      }
+    ]
+  },
+  "weather.thunder": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.weather.thunder",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:weather.thunder.close",
+        "type": "event"
+      },
+      {
+        "name": "notenoughrainsounds:weather.thunder.medium",
+        "type": "event"
+      },
+      {
+        "name": "notenoughrainsounds:weather.thunder.far",
+        "type": "event"
+      }
+    ]
+  },
+  "weather.rain": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.weather.rain",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_01_1",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_01_2",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_01_3",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_01_4",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_01_5",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_01_6",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_02_1",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_02_2",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_02_3",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_02_4",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_02_5",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_02_6",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_03_1",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_03_2",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_03_3",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_03_4",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_03_5",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_03_6",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_04_1",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_04_2",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_04_3",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_04_4",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_04_5",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_04_6",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_05_1",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_05_2",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_05_3",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_05_4",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_05_5",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_05_6",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_06_1",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_06_2",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_06_3",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_06_4",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_06_5",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_06_6",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_07_1",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_07_2",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_07_3",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_07_4",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_07_5",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_07_6",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_08_1",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_08_2",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_08_3",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_08_4",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_08_5",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 23
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_offsets/rain_08_6",
+        "volume": 0.7,
+        "preload": true,
+        "weight": 24
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_01",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_02",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_03",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_04",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_05",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_06",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_07",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_08",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_09",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_10",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_11",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_12",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_13",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_14",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_15",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_drops/mix_16",
+        "weight": 1,
+        "preload": true,
+        "volume": 0.7
+      }
+    ]
+  },
+  "weather.rain.above": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.weather.rain.above",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_eight/above_01",
+        "volume": 0.7,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_eight/above_02",
+        "volume": 0.7,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_eight/above_03",
+        "volume": 0.7,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_eight/above_04",
+        "volume": 0.7,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_eight/above_05",
+        "volume": 0.7,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_eight/above_06",
+        "volume": 0.7,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_eight/above_07",
+        "volume": 0.7,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:weather/wet_ground_eight/above_08",
+        "volume": 0.7,
+        "preload": true
+      }
+    ]
+  },
+  "rain.bamboo": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.bamboo",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/bamboo/bamboo_01",
+        "preload": true,
+        "attenuation_distance": 16
+      },
+      {
+        "name": "notenoughrainsounds:rain/bamboo/bamboo_02",
+        "preload": true,
+        "attenuation_distance": 16
+      },
+      {
+        "name": "notenoughrainsounds:rain/bamboo/bamboo_03",
+        "preload": true,
+        "attenuation_distance": 16
+      },
+      {
+        "name": "notenoughrainsounds:rain/bamboo/bamboo_04",
+        "preload": true,
+        "attenuation_distance": 16
+      },
+      {
+        "name": "notenoughrainsounds:rain/bamboo/bamboo_05",
+        "preload": true,
+        "attenuation_distance": 16
+      },
+      {
+        "name": "notenoughrainsounds:rain/bamboo/bamboo_06",
+        "preload": true,
+        "attenuation_distance": 16
+      },
+      {
+        "name": "notenoughrainsounds:rain/bamboo/bamboo_07",
+        "preload": true,
+        "attenuation_distance": 16
+      },
+      {
+        "name": "notenoughrainsounds:rain/bamboo/bamboo_08",
+        "preload": true,
+        "attenuation_distance": 16
+      }
+    ]
+  },
+  "rain.foliage": {
+    "replace": true,
+    "subtitle": "subtitles.notenoughrainsounds.rain.foliage",
+    "sounds": [
+      {
+        "name": "notenoughrainsounds:rain/foliage/foliage_01",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/foliage/foliage_02",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      },
+      {
+        "name": "notenoughrainsounds:rain/foliage/foliage_03",
+        "volume": 1.0,
+        "attenuation_distance": 16,
+        "preload": true
+      }
+    ]
+  }
+}

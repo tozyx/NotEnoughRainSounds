@@ -1,0 +1,220 @@
+{
+  "source": "User-selected AI-generated thunder recordings",
+  "processing": "Close thunder updated from the six selected takes on 2026-11-24. Trim quiet lead-ins and keep natural tails. Mix to mono, using more left channel on 7 and 8 to reduce bass cancellation. Match levels by fixed gain and limit peaks where needed. Encode as Vorbis q5.",
+  "sample_rate_hz": 48000,
+  "target_lufs": {
+    "close": -20.4,
+    "medium": -25.5,
+    "far": -28.5
+  },
+  "clips": [
+    {
+      "source": "selected/[ai]thunder_nearby2.wav",
+      "source_sha256": "570ea6475c942ced74ff173c281cc86b0d74dc985763c949377a1e603d6a1865",
+      "source_mono_lufs": -21.71,
+      "source_mono_dbtp": -2.58,
+      "mono_weights_left_right": [
+        0.5,
+        0.5
+      ],
+      "head_trim_seconds": 0.09,
+      "fade_in_seconds": 0.012,
+      "limiter_ceiling_dbtp": -2,
+      "gain_db": 1.31,
+      "post_gain_db": 0,
+      "duration_seconds": 11.91,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/close_2.ogg",
+      "ogg_sha256": "80e110a44c175eae970b071deccbe48fd2513ac607ffa036cdb5bc758fd5f7d7",
+      "ogg_lufs": -20.57,
+      "ogg_dbtp": -1.86
+    },
+    {
+      "source": "selected/[ai]thunder_nearby3.wav",
+      "source_sha256": "05dfe4b5122b064ef35d9024ebc897a6049c2cd3aedf02672de9d7ca613dabc5",
+      "source_mono_lufs": -21.26,
+      "source_mono_dbtp": -3.06,
+      "mono_weights_left_right": [
+        0.5,
+        0.5
+      ],
+      "head_trim_seconds": 0.22,
+      "fade_in_seconds": 0.012,
+      "limiter_ceiling_dbtp": null,
+      "gain_db": 0.86,
+      "post_gain_db": 0,
+      "duration_seconds": 11.78,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/close_3.ogg",
+      "ogg_sha256": "b3d569327783f972037e73697f3e3feda9522421dfbc23eef6525c13626ddc9d",
+      "ogg_lufs": -20.59,
+      "ogg_dbtp": -1.9
+    },
+    {
+      "source": "selected/[ai]thunder_nearby4.wav",
+      "source_sha256": "196c67ae3fd1ed9a4d504c6c726080e0af3a3e24f1f32efe161987777f1e99a8",
+      "source_mono_lufs": -21.39,
+      "source_mono_dbtp": -1.92,
+      "mono_weights_left_right": [
+        0.5,
+        0.5
+      ],
+      "head_trim_seconds": 0.14,
+      "fade_in_seconds": 0.012,
+      "limiter_ceiling_dbtp": -2,
+      "gain_db": 0.99,
+      "post_gain_db": 0,
+      "duration_seconds": 11.86,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/close_4.ogg",
+      "ogg_sha256": "ec25fc2cdb5dcb8131f918633ad246df1966b91854da6ca24f18c79fd4bb0f47",
+      "ogg_lufs": -20.74,
+      "ogg_dbtp": -1.94
+    },
+    {
+      "source": "selected/[ai]thunder_nearby5.wav",
+      "source_sha256": "778f808b1e9ca9337b04ea0ae38c1a9335bc525fcbdd52a7cc5c0b99c960ca96",
+      "source_mono_lufs": -19.16,
+      "source_mono_dbtp": -1.26,
+      "mono_weights_left_right": [
+        0.5,
+        0.5
+      ],
+      "head_trim_seconds": 0.215,
+      "fade_in_seconds": 0.012,
+      "limiter_ceiling_dbtp": null,
+      "gain_db": -1.24,
+      "post_gain_db": 0,
+      "duration_seconds": 11.785,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/close_5.ogg",
+      "ogg_sha256": "78f3fe761971cb07aa95e7f5815d8d6a296fbff55e7e27df5f376d63f84894bf",
+      "ogg_lufs": -20.57,
+      "ogg_dbtp": -2.71
+    },
+    {
+      "source": "selected/[ai]thunder_nearby7.wav",
+      "source_sha256": "8c0f41643af33ab70155dec0992fa8a97760edef98c7dbeabb8c080d2c4e13ea",
+      "source_mono_lufs": -18.76,
+      "source_mono_dbtp": -1.48,
+      "mono_weights_left_right": [
+        0.75,
+        0.25
+      ],
+      "head_trim_seconds": 0.055,
+      "fade_in_seconds": 0.012,
+      "limiter_ceiling_dbtp": null,
+      "gain_db": -1.64,
+      "post_gain_db": 0,
+      "duration_seconds": 11.945,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/close_7.ogg",
+      "ogg_sha256": "7429e0b3a5f02bf8dd2a685febdee403ec25a10b0d7599755fb52b5f7689ee43",
+      "ogg_lufs": -20.54,
+      "ogg_dbtp": -3.61
+    },
+    {
+      "source": "selected/[ai]thunder_nearby8.wav",
+      "source_sha256": "2254f0f289560125e406a74da13e43832cfc27062eeaf774bc13282bd62e542c",
+      "source_mono_lufs": -20.62,
+      "source_mono_dbtp": -1.55,
+      "mono_weights_left_right": [
+        0.75,
+        0.25
+      ],
+      "head_trim_seconds": 0.34,
+      "fade_in_seconds": 0.012,
+      "limiter_ceiling_dbtp": -2,
+      "gain_db": 0.22,
+      "post_gain_db": 0,
+      "duration_seconds": 11.66,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/close_8.ogg",
+      "ogg_sha256": "e610e59019804c88862887bae4d0ede55deb65230ed6a050b885610f8f34384c",
+      "ogg_lufs": -20.64,
+      "ogg_dbtp": -2.2
+    },
+    {
+      "source": "selected/[ai]thunder_medium1.wav",
+      "source_sha256": "c7b82752f1a0c87023c03aeedca2efa1d3ef8d791212ad5b2c43e8384e0c6754",
+      "source_mono_lufs": -25.0,
+      "gain_db": -0.5,
+      "ogg_sha256": "1e4b9f070b91f0711729abeb8dad454a89720de78cd1b4fddb75380245cb9048",
+      "ogg_lufs": -25.64,
+      "ogg_dbtp": -2.35,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/medium_1.ogg",
+      "duration_seconds": 8
+    },
+    {
+      "source": "selected/[ai]thunder_medium2.wav",
+      "source_sha256": "179abacc09e80231205e401c346299ed912e7357ad00efabff3ad90f508f0dbb",
+      "source_mono_lufs": -24.81,
+      "gain_db": -0.69,
+      "ogg_sha256": "634a718d8c5d5fa36cebc070365b5c34b6553bdd2d77efa5e124b5c224acd0ea",
+      "ogg_lufs": -25.64,
+      "ogg_dbtp": -3.74,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/medium_2.ogg",
+      "duration_seconds": 8
+    },
+    {
+      "source": "selected/[ai]thunder_medium3.wav",
+      "source_sha256": "22ea2fd9dfa9c52af2d25b3965ae87a98deff2b6c7bcd33d41d7be72670214e9",
+      "source_mono_lufs": -20.99,
+      "gain_db": -4.51,
+      "ogg_sha256": "c2bf4ae279459ddcffb1cd6a16d594fff0aad02bb4fc9089233db89db86c758d",
+      "ogg_lufs": -25.62,
+      "ogg_dbtp": -8.15,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/medium_3.ogg",
+      "duration_seconds": 8
+    },
+    {
+      "source": "selected/[ai]thunder_medium4.wav",
+      "source_sha256": "23e3ccc65035dfe94bcb72842f917af0a7f94e12a745cda0a2911e7a52c9f5c2",
+      "source_mono_lufs": -21.62,
+      "gain_db": -3.88,
+      "ogg_sha256": "0bf16262a79991c0e91bb8c1fbe2e1e34c3c590ce73487df60ce61ab0791c761",
+      "ogg_lufs": -25.62,
+      "ogg_dbtp": -7.76,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/medium_4.ogg",
+      "duration_seconds": 8
+    },
+    {
+      "source": "selected/[ai]thunder_far1.wav",
+      "source_sha256": "3f7f4c32b64ed2616ea331cae18bb213089137ca844cc454d91be29f4cdb4a76",
+      "source_mono_lufs": -24.9,
+      "gain_db": -3.6,
+      "ogg_sha256": "4128fc881ce7d551373919990a10d0bc41523222dae844f69c671704e9ec79c8",
+      "ogg_lufs": -28.54,
+      "ogg_dbtp": -8.21,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/far_1.ogg",
+      "duration_seconds": 8
+    },
+    {
+      "source": "selected/[ai]thunder_far2.wav",
+      "source_sha256": "f89d9714e4d7a106f8af240a85cb9c376f861b8ae87ab19973ba1920811839c6",
+      "source_mono_lufs": -26.69,
+      "gain_db": -1.81,
+      "ogg_sha256": "97cefd7643e46aab621a9d6ba746d2198e2d5dbe20e8ac3d9aa1cc3356d59360",
+      "ogg_lufs": -28.57,
+      "ogg_dbtp": -9.12,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/far_2.ogg",
+      "duration_seconds": 8
+    },
+    {
+      "source": "selected/[ai]thunder_far3.wav",
+      "source_sha256": "9b450db0aa968f0c73a2707972e23dd300957516cf5636dc4b5e96c2168803ac",
+      "source_mono_lufs": -21.09,
+      "gain_db": -7.41,
+      "ogg_sha256": "d07da940a4fcb7bfe1d2b4a20ec7ec97fd2a2e31189a057ec91da74252f0a342",
+      "ogg_lufs": -28.58,
+      "ogg_dbtp": -9.68,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/far_3.ogg",
+      "duration_seconds": 8
+    },
+    {
+      "source": "selected/[ai]thunder_far4.wav",
+      "source_sha256": "099698b4ac9e7d776cc7091965fdd2ebf99a9e32d4f104da6892f186a8ec1546",
+      "source_mono_lufs": -34.61,
+      "gain_db": 6.11,
+      "ogg_sha256": "4abc4f35a10f747adb6e66d0a40b667f2d0a81f5077f011d3b66ce9c1d40ccdc",
+      "ogg_lufs": -28.69,
+      "ogg_dbtp": -8.89,
+      "ogg": "assets/notenoughrainsounds/sounds/weather/thunder_audition/far_4.ogg",
+      "duration_seconds": 8
+    }
+  ]
+}

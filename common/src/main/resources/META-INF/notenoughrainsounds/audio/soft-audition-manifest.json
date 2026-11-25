@@ -1,0 +1,60 @@
+{
+  "source": "rain_fabric1.mp3",
+  "source_sha256": "0a4469ebbd9eeb02a5f2f889ee105b6626eb8fdcc53778de7d0bf45f9d974bdf",
+  "clips": [
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_01.ogg",
+      "start_seconds": 5,
+      "seconds": 3.048,
+      "decoded_lufs": -37.334028177617796
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_02.ogg",
+      "start_seconds": 25,
+      "seconds": 3.048,
+      "decoded_lufs": -37.31655708728819
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_03.ogg",
+      "start_seconds": 45,
+      "seconds": 3.048,
+      "decoded_lufs": -37.32501285806609
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_04.ogg",
+      "start_seconds": 1,
+      "seconds": 3.048,
+      "decoded_lufs": -37.34226927116766
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_05.ogg",
+      "start_seconds": 10,
+      "seconds": 3.048,
+      "decoded_lufs": -37.30579076273191
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_06.ogg",
+      "start_seconds": 16,
+      "seconds": 3.048,
+      "decoded_lufs": -37.32278725574399
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_07.ogg",
+      "start_seconds": 21,
+      "seconds": 3.048,
+      "decoded_lufs": -37.353251285978295
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_08.ogg",
+      "start_seconds": 34,
+      "seconds": 3.048,
+      "decoded_lufs": -37.26708808885745
+    },
+    {
+      "asset": "assets/notenoughrainsounds/sounds/rain/soft/soft_09.ogg",
+      "start_seconds": 50,
+      "seconds": 3.048,
+      "decoded_lufs": -37.35938312355544
+    }
+  ]
+}

@@ -19,11 +19,11 @@ notice and per-file manifest accompany the archived assets in
 soundResource/archives/NERS-Legacy-Audio. Preserve these records with the
 recordings. No new upstream authorship or permission is asserted here.
 
-Reference audio under soundResource/ is not included in the mod jars; each
-file retains its upstream terms. Source-specific records include
-soundResource/cool-rain/README.source.md and SOURCE.json.
-Future original or AI-generated audio will have its rights and license
-recorded individually; no blanket new audio license is granted here.
+Built mod jars include the selected, processed audio. The corresponding
+third-party notices are in META-INF/licenses/ and the source and processing
+records are in META-INF/notenoughrainsounds/audio/. Raw and reference
+collections under soundResource/ retain their own terms. The project
+license grants no blanket license for original or AI-generated audio.
 
 This combined LICENSE is included under META-INF/licenses/ in release and
 source jars. The separate legacy audio archive retains the-sound-of-rain.txt
