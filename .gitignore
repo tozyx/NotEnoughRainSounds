@@ -23,6 +23,8 @@ work/
 
 # docs
 /docs/*
+!/docs/logo.png
+!/docs/mod-icon.png
 !/docs/rain-audio-manifest.json
 !/docs/TODO.md
 

@@ -3,6 +3,7 @@
   "id": "notenoughrainsounds",
   "version": "${version}",
   "name": "Not Enough Rain Sounds",
+  "icon": "notenoughrainsounds-logo.png",
   "description": "Material-aware rain and carefully designed sound details for Minecraft.",
   "authors": [
     "tozyx"

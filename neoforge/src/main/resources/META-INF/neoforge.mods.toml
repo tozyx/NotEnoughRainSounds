@@ -7,6 +7,7 @@ issueTrackerURL = "https://github.com/tozyx/NotEnoughRainSounds/issues"
 modId = "notenoughrainsounds"
 version = "${version}"
 displayName = "Not Enough Rain Sounds"
+logoFile = "notenoughrainsounds-logo.png"
 authors = "tozyx"
 displayURL = "https://github.com/tozyx/NotEnoughRainSounds"
 description = '''Material-aware rain and carefully designed sound details for Minecraft.'''
