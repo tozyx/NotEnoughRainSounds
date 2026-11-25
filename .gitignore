@@ -31,3 +31,7 @@ work/
 # Local audio-editor waveform caches.
 *.reapeaks
 /soundResource/ai-generated-and-freesound/raw/*/
+
+# Keep only the AI-generated and Freesound collection under version control.
+/soundResource/*
+!/soundResource/ai-generated-and-freesound/
