@@ -40,7 +40,9 @@ public final class RainSampler {
         level = null;
         lastCenter = null;
         ticks = 0;
-        if (plan != null) plan.reset();
+        if (plan != null) {
+            plan.reset();
+        }
     }
 
     public List<RainSurface> surfaces(ClientLevel world, Vec3 listener, Entity vehicle, Set<RainSound> available) {
@@ -53,7 +55,9 @@ public final class RainSampler {
     }
 
     public void tick(ClientLevel world, Vec3 listener) {
-        if (settings == null) return;
+        if (settings == null) {
+            return;
+        }
         if (world != level) {
             clear();
             level = world;
@@ -75,42 +79,56 @@ public final class RainSampler {
         }
         lastCenter = center;
         long currentTick = ticks++;
-        // Keep samples for two full scan cycles; playback revalidates each chosen surface.
-        long ttl = Math.max(40L, 2L * ((plan.size() + settings.scanBudget - 1) / settings.scanBudget)
-                * settings.scanIntervalTicks);
-        surfaces.values().removeIf(surface -> currentTick - surface.checkedAt() > ttl
-                || !blocks.inside(surface, listener) || !world.hasChunkAt(surface.block()));
-        if (currentTick % settings.scanIntervalTicks != 0) {
-            if (settings.debugLogging && currentTick % 100 == 0) logSnapshot(world, listener);
-            return;
+        long batchesPerScan = (plan.size() + settings.scanBudget - 1) / settings.scanBudget;
+        long maxSampleAge = Math.max(40L, 2L * batchesPerScan * settings.scanIntervalTicks);
+        surfaces.values().removeIf(surface -> currentTick - surface.checkedAt() > maxSampleAge
+                || !blocks.isWithinRange(surface, listener) || !world.hasChunkAt(surface.block()));
+
+        if (currentTick % settings.scanIntervalTicks == 0) {
+            scanColumns(world, listener, center, currentTick);
         }
+        if (settings.debugLogging && currentTick % 100 == 0) {
+            logSnapshot(world, listener);
+        }
+    }
+
+    private void scanColumns(ClientLevel world, Vec3 listener, BlockPos center, long currentTick) {
         int markers = 0;
         for (ColumnScanPlan.Offset offset : plan.next(settings.scanBudget)) {
             int x = center.getX() + offset.x();
             int z = center.getZ() + offset.z();
-            RainSurface surface = blocks.inspect(world, listener, x, z, currentTick);
-            long key = ((long) x << 32) | (z & 0xffffffffL);
-            if (surface == null) surfaces.remove(key);
-            else {
-                surfaces.put(key, surface);
-                if (settings.debugParticles && markers++ < 8) showMarker(world, surface);
+            RainSurface surface = refreshColumn(world, listener, x, z, currentTick);
+            if (surface != null && settings.debugParticles && markers < 8) {
+                showMarker(world, surface);
+                markers++;
             }
         }
-        if (settings.debugLogging && currentTick % 100 == 0) logSnapshot(world, listener);
+    }
+
+    private RainSurface refreshColumn(ClientLevel world, Vec3 listener, int x, int z, long tick) {
+        RainSurface surface = blocks.inspect(world, listener, x, z, tick);
+        long columnKey = ((long) x << 32) | (z & 0xffffffffL);
+        if (surface == null) {
+            surfaces.remove(columnKey);
+        } else {
+            surfaces.put(columnKey, surface);
+        }
+        return surface;
     }
 
     public RainSurface revalidate(ClientLevel world, Vec3 listener, RainSurface cached) {
-        if (settings == null || !settings.enabled || world.getRainLevel(1.0F) <= 0) return null;
+        if (settings == null || !settings.enabled || world.getRainLevel(1.0F) <= 0) {
+            return null;
+        }
         if (cached.onBoat()) {
-            if (!settings.boatImpacts || !(world.getEntity(cached.boatId()) instanceof Boat boat)) return null;
+            if (!settings.boatImpacts || !(world.getEntity(cached.boatId()) instanceof Boat boat)) {
+                return null;
+            }
             return BoatRainSampler.inspect(world, listener, boat, cached.riddenBoat(), settings, ticks);
         }
-        RainSurface current = blocks.inspect(world, listener, cached.block().getX(), cached.block().getZ(), ticks);
-        long key = ((long) cached.block().getX() << 32) | (cached.block().getZ() & 0xffffffffL);
-        // A removed/covered anchor must not remain a preferred stale candidate until the next scan pass.
-        if (current == null) surfaces.remove(key);
-        else surfaces.put(key, current);
-        return current != null && current.block().equals(cached.block()) ? current : null;
+        BlockPos anchor = cached.block();
+        RainSurface current = refreshColumn(world, listener, anchor.getX(), anchor.getZ(), ticks);
+        return current != null && current.block().equals(anchor) ? current : null;
     }
 
     private static void showMarker(ClientLevel world, RainSurface surface) {
@@ -123,7 +141,9 @@ public final class RainSampler {
             case WATER -> new Vector3f(0.2F, 0.4F, 1.0F);
             default -> new Vector3f(0.9F, 0.9F, 0.9F);
         };
-        if (!surface.match().enhanced()) color.set(1.0F, 0.1F, 0.1F);
+        if (!surface.match().enhanced()) {
+            color.set(1.0F, 0.1F, 0.1F);
+        }
         Vec3 point = surface.position();
         world.addParticle(new DustParticleOptions(color, 0.8F), point.x, point.y + 0.1, point.z, 0, 0, 0);
     }
@@ -135,9 +155,15 @@ public final class RainSampler {
         RainSurface nearest = null;
         for (RainSurface surface : surfaces.values()) {
             counts.merge(surface.match().material(), 1, Integer::sum);
-            if (surface.match().enhanced()) enhanced++;
-            if (surface.match().plantDrips()) drips++;
-            if (nearest == null || surface.position().distanceToSqr(listener) < nearest.position().distanceToSqr(listener)) nearest = surface;
+            if (surface.match().enhanced()) {
+                enhanced++;
+            }
+            if (surface.match().plantDrips()) {
+                drips++;
+            }
+            if (nearest == null || surface.position().distanceToSqr(listener) < nearest.position().distanceToSqr(listener)) {
+                nearest = surface;
+            }
         }
         NotEnoughRainSounds.LOGGER.info("Rain scan: candidates={}, enhanced={}, plantDrips={}, materials={}, nearest={}",
                 surfaces.size(), enhanced, drips, counts, nearest == null ? "none" : nearest.block() + " "
