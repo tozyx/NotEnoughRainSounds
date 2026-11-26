@@ -28,7 +28,7 @@ class BambooSurfaceTest {
         var world = new Stalk(8);
         BlockPos anchor = TIP.below(2);
         Vec3 center = world.getBlockState(anchor).getShape(world, anchor).bounds().getCenter();
-        var surface = RainSampler.bambooSurface(world, TIP, MATCH, 10);
+        var surface = BlockRainSampler.bambooSurface(world, TIP, MATCH, 10);
         assertEquals(anchor, surface.block());
         assertEquals(Vec3.atLowerCornerOf(anchor).add(center), surface.position());
     }
@@ -36,9 +36,9 @@ class BambooSurfaceTest {
     @Test void shortStalkStaysInItsUpperHalfAndNeverScansPastAGap() {
         var world = new Stalk(6);
         world.blocks.remove(TIP.below(3));
-        assertEquals(TIP.below(), RainSampler.bambooSurface(world, TIP, MATCH, 0).block());
+        assertEquals(TIP.below(), BlockRainSampler.bambooSurface(world, TIP, MATCH, 0).block());
         world.blocks.put(TIP.below(), Blocks.BAMBOO_BLOCK.defaultBlockState());
-        assertEquals(TIP, RainSampler.bambooSurface(world, TIP, MATCH, 0).block());
+        assertEquals(TIP, BlockRainSampler.bambooSurface(world, TIP, MATCH, 0).block());
     }
 
     private static final class Stalk implements BlockGetter {
