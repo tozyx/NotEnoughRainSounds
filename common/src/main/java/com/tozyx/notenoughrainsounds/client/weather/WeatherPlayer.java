@@ -1,5 +1,6 @@
 package com.tozyx.notenoughrainsounds.client.weather;
 
+import com.tozyx.notenoughrainsounds.NotEnoughRainSounds;
 import com.tozyx.notenoughrainsounds.client.config.SoundConfig;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public final class WeatherPlayer {
     private ClientLevel level;
     private Vec3 previousListener;
     private long ticks;
+    private long nextRainLog;
 
     public void clear(SoundManager sounds) {
         clearRain(sounds);
@@ -26,6 +28,7 @@ public final class WeatherPlayer {
         level = null;
         previousListener = null;
         ticks = 0;
+        nextRainLog = 0;
     }
 
     private void clearRain(SoundManager sounds) {
@@ -69,12 +72,13 @@ public final class WeatherPlayer {
             return;
         }
         rain.removeIf(playing -> tick - playing.started() > 20 && !sounds.isActive(playing.sound()));
-        boolean underRoof = !rain.isEmpty() && SoundOcclusion.hasRoof(level, previousListener);
+        SoundOcclusion.RainShelter shelter = null;
         for (Rain playing : rain) {
             if (playing.sound() instanceof FilteredBackgroundRainSound sound && SoundOcclusion.spatial(sound)
                     && (tick - playing.started()) % OcclusionGain.CHECK_INTERVAL_TICKS == 0) {
-                sound.rainOcclusion().target(underRoof
-                        && SoundOcclusion.rainBlocked(level, previousListener, sound.sourcePoint()));
+                if (shelter == null) shelter = SoundOcclusion.rainShelter(level, previousListener);
+                sound.rainOcclusion().target(SoundOcclusion.shelteredRain(level, shelter, previousListener,
+                        sound.sourcePoint()));
             }
         }
         // Background starts only in replace(), from a genuine native weather.rain / rain.above request.
@@ -88,10 +92,17 @@ public final class WeatherPlayer {
         boolean rainRequest = request.equals(WeatherSoundPolicy.Event.RAIN.original())
                 || request.equals(WeatherSoundPolicy.Event.RAIN_ABOVE.original());
         Vec3 listener = minecraft.gameRenderer.getMainCamera().getPosition();
-        boolean blockedRain = rainRequest && config.enabled && config.weather.rain.enabled && SoundOcclusion.spatial(original)
-                && SoundOcclusion.hasRoof(minecraft.level, listener)
-                && SoundOcclusion.rainBlocked(minecraft.level, listener,
-                        new Vec3(original.getX(), original.getY(), original.getZ()));
+        boolean blockedRain = false;
+        if (rainRequest && config.enabled && config.weather.rain.enabled && SoundOcclusion.spatial(original)) {
+            var shelter = SoundOcclusion.rainShelter(minecraft.level, listener);
+            blockedRain = SoundOcclusion.shelteredRain(minecraft.level, shelter, listener,
+                    new Vec3(original.getX(), original.getY(), original.getZ()));
+            if (config.rain.debugLogging && ticks >= nextRainLog) {
+                NotEnoughRainSounds.LOGGER.info("Background rain: listener={}, shelter={}, blocked={}, lowPassEnabled={}",
+                        listener, shelter, blockedRain, config.rainLowPass);
+                nextRainLog = ticks + 20;
+            }
+        }
         var decision = WeatherSoundPolicy.select(request, config, blockedRain, id -> available(sounds, id));
         if (decision.action() == WeatherSoundPolicy.Action.KEEP_ORIGINAL) return false;
         if (decision.action() == WeatherSoundPolicy.Action.MUTE) return true;

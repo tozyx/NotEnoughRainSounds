@@ -35,6 +35,50 @@ class RainOcclusionTest {
         assertTrue(rainBlocked(world, LISTENER, RAIN));
     }
 
+    @Test void villageRoofHeightIsAvailableInClientChunkPackets() {
+        assertTrue(SoundOcclusion.ROOF_HEIGHTMAP.sendToClient());
+        var scene = new Scene();
+        Vec3 eye = new Vec3(.09, 71.62, .53);
+        BlockPos ceiling = new BlockPos(0, 75, 0);
+        scene.blocks.put(ceiling, Blocks.OAK_PLANKS.defaultBlockState());
+        for (var direction : net.minecraft.core.Direction.Plane.HORIZONTAL) {
+            scene.blocks.put(ceiling.relative(direction), Blocks.OAK_PLANKS.defaultBlockState());
+            scene.blocks.put(BlockPos.containing(eye).relative(direction, 2), Blocks.GLASS_PANE.defaultBlockState()
+                    .setValue(net.minecraft.world.level.block.IronBarsBlock.NORTH, true)
+                    .setValue(net.minecraft.world.level.block.IronBarsBlock.SOUTH, true)
+                    .setValue(net.minecraft.world.level.block.IronBarsBlock.EAST, true)
+                    .setValue(net.minecraft.world.level.block.IronBarsBlock.WEST, true));
+        }
+        assertEquals(SoundOcclusion.RainShelter.ENCLOSED,
+                SoundOcclusion.rainShelter(scene, eye, pos -> 76, pos -> true));
+    }
+
+    @Test void villageRoomWithAnOpenDoorKeepsBackgroundRainSheltered() {
+        var scene = new Scene();
+        for (int x = -2; x <= 2; x++) {
+            for (int z = -2; z <= 2; z++) {
+                scene.blocks.put(new BlockPos(x, 68, z), Blocks.OAK_STAIRS.defaultBlockState());
+                if (Math.abs(x) == 2 || Math.abs(z) == 2) {
+                    if (x == 2 && z == 0) continue;
+                    for (int y = 64; y < 68; y++) {
+                        scene.blocks.put(new BlockPos(x, y, z), Blocks.OAK_PLANKS.defaultBlockState());
+                    }
+                }
+            }
+        }
+        assertFalse(rainBlocked(scene, LISTENER, RAIN));
+        var shelter = SoundOcclusion.rainShelter(scene, LISTENER, pos -> 69, pos -> true);
+        assertEquals(SoundOcclusion.RainShelter.ENCLOSED, shelter);
+        assertTrue(SoundOcclusion.shelteredRain(scene, shelter, LISTENER, RAIN, pos -> true));
+        assertTrue(SoundOcclusion.shelteredRain(scene, shelter, LISTENER, new Vec3(-7, 64, .5), pos -> true));
+
+        scene.blocks.entrySet().removeIf(e -> e.getKey().getY() < 68);
+        var porch = SoundOcclusion.rainShelter(scene, LISTENER, pos -> 69, pos -> true);
+        assertEquals(SoundOcclusion.RainShelter.ROOF_ONLY, porch);
+        assertFalse(SoundOcclusion.shelteredRain(scene, porch, LISTENER, RAIN, pos -> true));
+        assertTrue(SoundOcclusion.shelteredRain(scene, porch, LISTENER, new Vec3(.5, 68.5, .5), pos -> true));
+    }
+
     @Test void openWindowLeavesTheOutsideRainDirect() {
         var world = new Scene();
         world.wall();

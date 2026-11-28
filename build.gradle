@@ -11,7 +11,7 @@ architectury {
 
 allprojects {
     group = rootProject.maven_group
-    version = "${rootProject.mod_version}+mc${rootProject.minecraft_version}"
+    version = rootProject.mod_version
 }
 
 subprojects {
@@ -20,7 +20,7 @@ subprojects {
     apply from: rootProject.file('gradle/scripts/java.gradle')
 
     base {
-        archivesName = "${rootProject.archives_name}-${project.name}"
+        archivesName = "${rootProject.archives_name}-${project.name}-${rootProject.minecraft_version}"
     }
 
     dependencies {

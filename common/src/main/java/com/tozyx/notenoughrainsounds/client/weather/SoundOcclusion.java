@@ -19,6 +19,9 @@ import net.minecraft.world.phys.Vec3;
 public final class SoundOcclusion {
     private static final double MAX_TRACE_DISTANCE = 32;
 
+    // Initial client chunk packets carry this heightmap. The vertical collision ray skips leaves.
+    static final Heightmap.Types ROOF_HEIGHTMAP = Heightmap.Types.MOTION_BLOCKING;
+
     private SoundOcclusion() {}
 
     static boolean spatial(SoundInstance sound) {
@@ -28,7 +31,7 @@ public final class SoundOcclusion {
     /** Require cover over a majority of five points, spanning both horizontal axes. */
     public static boolean hasRoof(ClientLevel world, Vec3 listener) {
         return hasRoof(world, listener,
-                pos -> world.getHeight(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos.getX(), pos.getZ()),
+                pos -> world.getHeight(ROOF_HEIGHTMAP, pos.getX(), pos.getZ()),
                 pos -> loaded(world, pos));
     }
 
@@ -53,8 +56,33 @@ public final class SoundOcclusion {
         return top > point.y && trace(world, point, new Vec3(point.x, top, point.z), loaded, true, true) ? 1 : 0;
     }
 
-    static boolean rainBlocked(ClientLevel world, Vec3 listener, Vec3 source) {
-        return rainBlocked(world, listener, source, pos -> loaded(world, pos));
+    enum RainShelter { OPEN, ROOF_ONLY, ENCLOSED }
+
+    static RainShelter rainShelter(ClientLevel world, Vec3 listener) {
+        return rainShelter(world, listener,
+                pos -> world.getHeight(ROOF_HEIGHTMAP, pos.getX(), pos.getZ()),
+                pos -> loaded(world, pos));
+    }
+
+    static RainShelter rainShelter(BlockGetter world, Vec3 listener, ToIntFunction<BlockPos> roofHeight,
+                                    Predicate<BlockPos> loaded) {
+        if (!hasRoof(world, listener, roofHeight, loaded)) return RainShelter.OPEN;
+        int walls = 0;
+        for (Direction direction : Direction.Plane.HORIZONTAL) {
+            Vec3 end = listener.add(8 * direction.getStepX(), 0, 8 * direction.getStepZ());
+            if (trace(world, listener, end, loaded, true, true) && ++walls == 3) return RainShelter.ENCLOSED;
+        }
+        return RainShelter.ROOF_ONLY;
+    }
+
+    static boolean shelteredRain(BlockGetter world, RainShelter shelter, Vec3 listener, Vec3 source,
+                                 Predicate<BlockPos> loaded) {
+        return shelter == RainShelter.ENCLOSED
+                || shelter == RainShelter.ROOF_ONLY && rainBlocked(world, listener, source, loaded);
+    }
+
+    static boolean shelteredRain(ClientLevel world, RainShelter shelter, Vec3 listener, Vec3 source) {
+        return shelteredRain(world, shelter, listener, source, pos -> loaded(world, pos));
     }
 
     static boolean rainBlocked(BlockGetter world, Vec3 listener, Vec3 source, Predicate<BlockPos> loaded) {
